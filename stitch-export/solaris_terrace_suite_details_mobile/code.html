@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Azure Horizon Royal Suite | SOLARIS TERRACE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#1b1c1a",
+                    "surface-tint": "#a73918",
+                    "surface-container-highest": "#e3e2df",
+                    "on-primary-container": "#fffbff",
+                    "on-primary": "#ffffff",
+                    "primary": "#a43716",
+                    "on-primary-fixed": "#3b0900",
+                    "on-secondary-fixed-variant": "#0a4d62",
+                    "on-tertiary-fixed-variant": "#703703",
+                    "secondary-fixed-dim": "#98cee7",
+                    "secondary-container": "#aee5fe",
+                    "on-tertiary-container": "#fffbff",
+                    "on-surface": "#1b1c1a",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e9e8e4",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#ffdbd1",
+                    "on-surface-variant": "#58423c",
+                    "error-container": "#ffdad6",
+                    "background": "#faf9f5",
+                    "tertiary-container": "#a8642e",
+                    "error": "#ba1a1a",
+                    "outline": "#8b716a",
+                    "surface-container-low": "#f4f4f0",
+                    "inverse-surface": "#2f312e",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#f2f1ed",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-tertiary-fixed": "#301400",
+                    "on-primary-fixed-variant": "#862201",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#ffb5a0",
+                    "outline-variant": "#dfc0b7",
+                    "on-secondary-fixed": "#001f29",
+                    "surface-container": "#efeeea",
+                    "surface": "#faf9f5",
+                    "secondary": "#2c657b",
+                    "tertiary": "#8b4c18",
+                    "inverse-primary": "#ffb5a0",
+                    "surface-bright": "#faf9f5",
+                    "tertiary-fixed-dim": "#ffb785",
+                    "primary-container": "#c54f2c",
+                    "surface-variant": "#e3e2df",
+                    "surface-dim": "#dbdad6",
+                    "on-secondary-container": "#2f677d",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#bce9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "120px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "64px",
+                    "unit": "8px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Playfair Display"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "title-lg": ["20px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .aspect-hero {
+            aspect-ratio: 4 / 5;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-margin-mobile h-16 bg-transparent transition-colors duration-300" id="main-header">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-on-surface shadow-sm" onclick="history.back()">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-on-surface shadow-sm">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-on-surface shadow-sm">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</header>
+<main class="pb-32">
+<!-- Image Gallery Carousel -->
+<section class="relative w-full aspect-hero overflow-hidden">
+<div class="flex w-full h-full overflow-x-auto snap-x snap-mandatory hide-scrollbar" id="carousel">
+<div class="flex-none w-full h-full snap-start">
+<img alt="Azure Horizon Royal Suite" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARBzMjmDn3uSa18_1C3WUKpHo9ZKBacQD3dzYnFN7LJfiscEtXPLsJJ5MR9WSh9XDd8Iqaa55S-OOZ9nQBd0oWPI7tDrEprRwvW10JQ59mmDXv6q7xxw1HxKy6ftSKvNZacw41AHzr-IIKuExFb85PFAf5v2cSqtZktWWW7yIoVxTtgE13U8KDzrU99nbzrcMHt7PFixfZ_rjsUrAHIQi16wBGvLzWmG5AaGpvR1S1JTChBPTsWnzcU28TWbvkS_zrpvsnSaCbrokQ"/>
+</div>
+<div class="flex-none w-full h-full snap-start">
+<img alt="Ensuite Spa View" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTEqygWu71lvJrme0kI3e5dcf4EvePlfANYtjM7J3zKUN6VogP__5wtHItJ_OQka8YzbxbHk3K2wc_MuMyKXp65wVHro1JRSjoC0NhndNgIZUdD0UpZhlgYIZYCLhbylJ6AitTAOQlEvdk4fhxbBLJwoO-IGTZHZ-syfcFjBAXWSHpy9Dc9qEtsD5gT7PNs5Abp5w8DKvSeXZQCpse9pEdt1TzZ17I1h0C-F4iRrGp6XI_u2RNWmf786GDmUKQ8oGPW09mE8RhSGnW"/>
+</div>
+<div class="flex-none w-full h-full snap-start">
+<img alt="Private Balcony Twilight" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSF_Q4I8zU7aXUXPheuQkDxiisH4Qt4iJTLm8P2IcML0RhoNRZ9ZEgSYuhaRRjYbHNCYhcS2jsDRvg_TY8vWztM2iK2B2PZPKpTquzv5YPhUhjtqrMIoyj168Fr89LWrMEZEj8n1GK4pz1TPYQjlSuxc1v70O-xSexvdplPWcM5tuG9s-iRdGSDcHRgw_Uzb0epv8hWZ6P2Wol8HrMHD1K6H770WUmQb916BtW22GBH-EWSYXszwPj6G5ClWLV0KjnzVL7RHdU7wID"/>
+</div>
+</div>
+<!-- Pagination Indicator -->
+<div class="absolute bottom-6 right-margin-mobile px-3 py-1 bg-on-background/60 backdrop-blur-md rounded-full text-[10px] font-label-md text-surface-container-lowest tracking-widest uppercase">
+<span id="current-slide">1</span> / 3
+        </div>
+</section>
+<!-- Room Header Info -->
+<section class="px-margin-mobile pt-8">
+<div class="flex flex-col gap-2">
+<span class="text-label-md font-label-md text-primary tracking-widest uppercase">Solaris Terrace Signature</span>
+<h1 class="text-headline-md font-headline-md text-on-background leading-tight">Azure Horizon Royal Suite</h1>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px] text-tertiary">star</span>
+<span class="text-body-md font-body-md font-bold">4.98</span>
+</div>
+<span class="text-outline-variant">•</span>
+<span class="text-body-md font-body-md text-on-surface-variant underline">124 Reviews</span>
+</div>
+</div>
+<!-- Key Specs -->
+<div class="flex justify-between mt-8 py-6 border-y border-outline-variant/30">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-secondary">aspect_ratio</span>
+<span class="text-[11px] font-label-md uppercase tracking-wider text-on-surface-variant">115 m²</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-secondary">king_bed</span>
+<span class="text-[11px] font-label-md uppercase tracking-wider text-on-surface-variant">King Size</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-secondary">groups</span>
+<span class="text-[11px] font-label-md uppercase tracking-wider text-on-surface-variant">3 Guests</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-secondary">waves</span>
+<span class="text-[11px] font-label-md uppercase tracking-wider text-on-surface-variant">Ocean View</span>
+</div>
+</div>
+</section>
+<!-- Heritage & Design -->
+<section class="px-margin-mobile mt-12">
+<h2 class="text-title-lg font-title-lg text-on-background mb-4">Heritage &amp; Design</h2>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+            As the crown jewel of Solaris Terrace, the Azure Suite seamlessly blends traditional hand-painted tiles with sleek, modernist furniture. Every element is curated to reflect our "Solaris &amp; Sea" ethos—capturing the warmth of the Mediterranean sun through terracotta accents and the calming depth of the ocean with custom-dyed silk textiles found only at our estate.
+        </p>
+<div class="mt-6 p-6 bg-surface-container-low rounded-2xl flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<div>
+<h4 class="text-label-md font-label-md text-on-background mb-1">Estate Philosophy</h4>
+<p class="text-body-md font-body-md text-on-surface-variant italic text-sm">
+                    "At Solaris Terrace, the room is a living gallery where the primary artwork is the horizon itself." — Elena Rossi, Lead Designer
+                </p>
+</div>
+</div>
+</section>
+<!-- Amenities Grid (Optimized Spacing) -->
+<section class="px-margin-mobile mt-12">
+<h2 class="text-title-lg font-title-lg text-on-background mb-6">Signature Amenities</h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center gap-4 p-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl">
+<div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-surface-container-high rounded-full text-secondary">
+<span class="material-symbols-outlined">wifi</span>
+</div>
+<span class="text-[15px] font-body-md leading-tight">Giga-Speed Wi-Fi</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl">
+<div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-surface-container-high rounded-full text-secondary">
+<span class="material-symbols-outlined">coffee_maker</span>
+</div>
+<span class="text-[15px] font-body-md leading-tight">Nespresso Bar</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl">
+<div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-surface-container-high rounded-full text-secondary">
+<span class="material-symbols-outlined">hot_tub</span>
+</div>
+<span class="text-[15px] font-body-md leading-tight">Private Jacuzzi</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl">
+<div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-surface-container-high rounded-full text-secondary">
+<span class="material-symbols-outlined">wine_bar</span>
+</div>
+<span class="text-[15px] font-body-md leading-tight">Private Cellar</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl">
+<div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-surface-container-high rounded-full text-secondary">
+<span class="material-symbols-outlined">dry_cleaning</span>
+</div>
+<span class="text-[15px] font-body-md leading-tight">Elite Laundry</span>
+</div>
+<div class="flex items-center gap-4 p-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl">
+<div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-surface-container-high rounded-full text-secondary">
+<span class="material-symbols-outlined">concierge</span>
+</div>
+<span class="text-[15px] font-body-md leading-tight">24/7 Butler</span>
+</div>
+</div>
+<button class="w-full mt-8 py-4 border border-outline text-label-md font-label-md tracking-widest uppercase rounded-full hover:bg-surface-container-highest transition-colors active:bg-surface-container-highest">
+            Explore All 42 Amenities
+        </button>
+</section>
+<!-- Guest Experiences Carousel (Optimized Spacing) -->
+<section class="mt-12">
+<div class="px-margin-mobile mb-6">
+<h2 class="text-title-lg font-title-lg text-on-background">Solaris Terrace Experiences</h2>
+<p class="text-body-md text-on-surface-variant mt-1">Curated exclusively for our residents</p>
+</div>
+<div class="flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar px-margin-mobile pb-4">
+<!-- Card 1 -->
+<div class="relative flex-none w-[85%] aspect-[4/5] rounded-3xl overflow-hidden snap-center group">
+<img alt="Private Pier Dining" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCewxDE5OSDhM0PJTRnRjJtOQ_6EPhwlrIT1TtIj1YdwvZFOy348c5d7lTQaUf4eaWiQG3NngSwy1pHNOXcatrWNmYZbLKFvGTtSRir_0xWCA7sJT71jo7Cw8alYizXc0pOA06FnGLg2-m2HIsrKbm1HRagH3MxRqgdB4jcZaqxoyBXYOLdhlnk-BNSuW5GzbyYGBVm5FHsIYdE9Q-uipSYB2N-5jjaHTvOg7i3ZLdQUdYspsHXFZKXA98fZR4pmUkzM1RrgeaZUi8r"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/20 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<h4 class="text-title-lg font-title-lg text-surface-container-lowest">Moonlight Pier Dining</h4>
+<p class="text-label-md font-label-md text-surface-container-highest/80 mt-1">Reserve from €450</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="relative flex-none w-[85%] aspect-[4/5] rounded-3xl overflow-hidden snap-center group">
+<img alt="Sunrise Yoga Session" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5oJ77TRBsSpYteUkt4-yek7yfia9fvdvw3ZISVgEhk0QrzmBVVWPuEBXfdVFl11CD3G-h2ulXoNhXtWAEc2DD2nA3A3mscX7qVyTqkrnRuFAOeEw8UqCl8pqRPJsO335aqZjfRd3akoiLdCAegzUQwm56NpgxdQJPVEM9gqE6ID5bkaajs0e2tNWDMel0_Xe0hxPskJWn_cfihXMmjKUVMOFsCqhfqK6YS9Q2P0F5m8RzwoyZtHA6d2Aw6ggryHCzLcrphPRuqHXk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/90 via-on-background/20 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<h4 class="text-title-lg font-title-lg text-surface-container-lowest">Sunrise Coastal Yoga</h4>
+<p class="text-label-md font-label-md text-surface-container-highest/80 mt-1">Solaris Circle Exclusive</p>
+</div>
+</div>
+<!-- Card 3 (Empty spacer for scroll padding) -->
+<div class="flex-none w-[10px]"></div>
+</div>
+</section>
+</main>
+<!-- Sticky Book Now Footer -->
+<footer class="fixed bottom-0 left-0 right-0 bg-surface-container-lowest/95 backdrop-blur-xl border-t border-outline-variant/20 px-margin-mobile py-4 z-50 shadow-[0_-8px_32px_rgba(167,57,24,0.08)]">
+<div class="flex items-center justify-between max-w-lg mx-auto">
+<div class="flex flex-col">
+<div class="flex items-baseline gap-1">
+<span class="text-headline-md font-headline-md text-primary">€1,250</span>
+<span class="text-[12px] font-label-md text-on-surface-variant tracking-wider uppercase">/ Night</span>
+</div>
+<span class="text-[11px] font-label-md text-secondary tracking-wide uppercase mt-0.5">Premier Residence</span>
+</div>
+<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-md tracking-widest uppercase shadow-lg shadow-primary/20 active:scale-95 transition-all">
+            Book Stay
+        </button>
+</div>
+</footer>
+<script>
+    // Carousel Pagination Logic
+    const carousel = document.getElementById('carousel');
+    const slideCounter = document.getElementById('current-slide');
+    
+    carousel.addEventListener('scroll', () => {
+        const width = carousel.offsetWidth;
+        const scrollLeft = carousel.scrollLeft;
+        const slideIndex = Math.round(scrollLeft / width) + 1;
+        slideCounter.textContent = slideIndex;
+    });
+
+    // Header Scroll Interaction
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.classList.remove('bg-transparent');
+            header.classList.add('bg-surface-container-lowest/90', 'backdrop-blur-md', 'shadow-sm');
+        } else {
+            header.classList.add('bg-transparent');
+            header.classList.remove('bg-surface-container-lowest/90', 'backdrop-blur-md', 'shadow-sm');
+        }
+    });
+</script>
+</body></html>
