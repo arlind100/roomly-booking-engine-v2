@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import RoomsPage from './pages/RoomsPage';
 import RoomDetailPage from './pages/RoomDetailPage';
 import BookingPage from './pages/BookingPage';
+import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 const queryClient = new QueryClient({
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/rooms" element={<RoomsPage />} />
           <Route path="/rooms/:id" element={<RoomDetailPage />} />
           <Route path="/booking" element={<BookingPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
