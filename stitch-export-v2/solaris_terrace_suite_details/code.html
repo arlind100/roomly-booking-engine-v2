@@ -1,0 +1,464 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>The Azure Suite | SOLARIS TERRACE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#58423c",
+                      "tertiary-container": "#a8642e",
+                      "outline-variant": "#dfc0b7",
+                      "on-error-container": "#93000a",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#c54f2c",
+                      "surface-container-high": "#e9e8e4",
+                      "on-tertiary-container": "#fffbff",
+                      "tertiary-fixed-dim": "#ffb785",
+                      "on-tertiary": "#ffffff",
+                      "surface-variant": "#e3e2df",
+                      "on-background": "#1b1c1a",
+                      "on-primary-fixed-variant": "#862201",
+                      "on-primary-fixed": "#3b0900",
+                      "surface-tint": "#a73918",
+                      "tertiary-fixed": "#ffdcc6",
+                      "outline": "#8b716a",
+                      "surface-container-low": "#f4f4f0",
+                      "on-surface": "#1b1c1a",
+                      "error": "#ba1a1a",
+                      "secondary": "#2c657b",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#aee5fe",
+                      "inverse-on-surface": "#f2f1ed",
+                      "on-tertiary-fixed": "#301400",
+                      "tertiary": "#8b4c18",
+                      "primary-fixed": "#ffdbd1",
+                      "surface-container": "#efeeea",
+                      "surface-container-highest": "#e3e2df",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#2f312e",
+                      "on-secondary-fixed": "#001f29",
+                      "on-primary-container": "#fffbff",
+                      "on-tertiary-fixed-variant": "#703703",
+                      "secondary-fixed": "#bce9ff",
+                      "on-secondary-container": "#2f677d",
+                      "primary": "#a43716",
+                      "secondary-fixed-dim": "#98cee7",
+                      "on-secondary-fixed-variant": "#0a4d62",
+                      "surface-dim": "#dbdad6",
+                      "surface": "#faf9f5",
+                      "background": "#faf9f5",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#faf9f5",
+                      "primary-fixed-dim": "#ffb5a0",
+                      "inverse-primary": "#ffb5a0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.5rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-desktop": "64px",
+                      "container-max": "1280px",
+                      "unit": "8px",
+                      "margin-mobile": "20px",
+                      "section-gap": "120px"
+              },
+              "fontFamily": {
+                      "title-lg": ["Plus Jakarta Sans"],
+                      "display-lg-mobile": ["Playfair Display"],
+                      "label-md": ["Plus Jakarta Sans"],
+                      "headline-md": ["Playfair Display"],
+                      "headline-lg": ["Playfair Display"],
+                      "body-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"],
+                      "display-lg": ["Playfair Display"]
+              },
+              "fontSize": {
+                      "title-lg": ["20px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                      "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .mosaic-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: repeat(2, 300px);
+            gap: 16px;
+        }
+        .mosaic-large {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+        }
+        @media (max-width: 768px) {
+            .mosaic-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(3, 200px);
+            }
+            .mosaic-large {
+                grid-column: 1 / 3;
+                grid-row: 1 / 2;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- Top Navigation Bar -->
+<nav class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30 docked full-width top-0 z-50 shadow-sm fixed w-full">
+<div class="flex justify-between items-center w-full px-margin-desktop py-6 max-w-container-max mx-auto">
+<div class="font-display-lg text-title-lg tracking-widest text-primary dark:text-primary-fixed-dim uppercase">SOLARIS TERRACE</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary font-bold pb-1 font-body-lg text-body-lg" href="#">Suites</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-body-lg text-body-lg" href="#">Dining</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 font-body-lg text-body-lg" href="#">Wellness</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="account_circle">account_circle</button>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md scale-95 active:scale-90 transition-transform uppercase tracking-wider">Book A Stay</button>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-section-gap">
+<!-- Hero Mosaic Gallery -->
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-8">
+<div class="mosaic-grid">
+<div class="mosaic-large relative overflow-hidden rounded-xl group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A sprawling, sun-drenched luxury master bedroom suite featuring floor-to-ceiling windows overlooking a crystal clear turquoise ocean. The interior is styled with warm terracotta tones, minimalist furniture, and fine linens, bathed in golden hour natural light. The overall mood is one of sophisticated, peaceful opulence with a clean modern editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6cjb1Avz6xlOTzdMZmKdq5yhGyS0-5633R7f7o6G_O5CKZAYyED-9Hm5XyZLWJBGdzSIzeuVMbJbB5MFdjzLj9LO5tf56gqaA7wU3UwTEHAw-sR9YA0ycdIoO7K9fLKEaHzXHmvo-OOtYcwNEzmSW7BO18dpabJ_IMl5yrfpqi-enLeb7mBUwpVG2WzvcWY_SuZ0Uwk10n0Uut1KC9qvYorm4ySNSlmPkmy6uhY1LH5YNQfn82HC9EwDxzZEYrYRV4OlWLy0WWxiJ">
+</div>
+<div class="relative overflow-hidden rounded-xl group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A luxurious en-suite bathroom with a deep soaking stone tub positioned next to a large window showing a coastal sunset. The room features sand-colored marble walls and warm ambient lighting. The design reflects an adventurous luxury style with organic textures and premium finishes in a high-key bright setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9JXykOMGmGCYH_EPLSu2OMxv8onxWZD4WyZqt3Y6Ym3vEtbpTA8gLkdW7jVC4lyc68TAVusBtNArgDa778pC3eenVukscz2bB4M2JBZM6OEVgRkD0uI4Gwf22FjgiE7-_PfV-AYlih3j1V1dN834bgaFTTCh6cILKnSuyiNoZrh81sNcPYO57i1picBYq8F6gbX0aTvCXIUEvSwH1czaf636cPYY-ivIUgx4r7_jfnoE4Htgh1dozNkidiKM4nDXCY21H1Z4QUs1M">
+</div>
+<div class="relative overflow-hidden rounded-xl group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Detail shot of high-end interior design in a luxury hotel suite showing a curated shelf with art books, a single designer chair in leather, and a view into a private balcony. The palette uses deep ocean blues and terracotta accents against warm-white walls, evoking a sun-drenched and welcoming Mediterranean atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgv0szHZYPWQn68N8CkAbabtykA4Pe_pDU9o_MB1waUUNRR0le7RAkubvPf2-XRASvdOjJfLAnlMnTcaH2OeyaRcR7_FgZrz48Vh3ATsckmb_i6mGJ2nZs3WdZJdWN6pSPc-sjYrs1NkFc9tGnzIKupiSm_UgQaFH_pJIgwVvnYBLsh4_jlfMYhtapbDeMu0lquxhxKAw16BViqqg6ASHwI-J64cbvvx4dNCc6hcf0KpYCy9CNvWQbKU8r0L7g4RYEjzzkTa_ym3jr">
+</div>
+<div class="relative overflow-hidden rounded-xl group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A private infinity pool attached to a luxury suite, reflecting the clear blue sky and surrounding tropical greenery. The deck is made of weathered wood with modern lounge chairs. The image has an editorial, high-fidelity travel photography feel with generous negative space and a focus on tranquility and high-end hospitality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUot2M5HLcOZmvaPzvgEqEd88w8ZVCtAxUH3LpW8qZE66pwynoC41WjgILAC8P1OTDhR8KMbNJGhQiyM3N0lkqs6PmXGccXCSa5uL6y83vq04Y-x8QACndXzQvdHrv9_kzhK1roQ9fKM1mvjQqZ_jpsqGdzExOtEKgblzrlFBWTUOELYXyMDMqVNj39wFQFjdTIjl_UYZFiSDrPudsJn4zslJRgk-3jsZncK99uqHAOYlHJ9d1juCjDIkhPVW-qCAMOYOGSO1cnTqq">
+</div>
+<div class="relative overflow-hidden rounded-xl group bg-surface-container-high flex items-center justify-center cursor-pointer">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="An atmospheric shot of a luxury suite living area at dusk, with soft interior lamps illuminating plush textures and a designer coffee table. The wide window reveals a deep blue twilight sky over the ocean. The lighting is low-contrast and warm, emphasizing the cozy yet premium adventurous luxury brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5FfgcvbazOwQhQDH1LWS7tUPy6MkX5uveKadsL0bkxFrxXHMvYJMEZ0Yt_Yn2UdP5SmbNX1_Vvkh6Lzo2KRxPooVW6F3b6DqrpJ665-zG1UK8KFm-42ET2uD14x8jfQzYTHtsP2ne_vwMoUDQnBjqTNdRFzykLwPzvfOUd_p9684KJBEkzDdydms4MEM0lz_bBkDeTaU6OzZsUxK2BR2rxw-aOYQJ0VvoIw7YIZoRsF5qCeHJP1-jjR6C7GSD_M3yG7oV6s-6b9Ns">
+<span class="relative font-label-md text-label-md text-on-surface z-10 uppercase tracking-widest">+ 12 Photos</span>
+</div>
+</div>
+</div>
+<!-- Content Section -->
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Suite Details -->
+<div class="lg:col-span-8">
+<header class="mb-12">
+<div class="flex items-center gap-4 mb-4">
+<span class="bg-secondary/10 text-secondary px-4 py-1 rounded-full font-label-md text-label-md uppercase tracking-wider">Premium Suite</span>
+<div class="flex items-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md ml-1">4.9 (124 Reviews)</span>
+</div>
+</div>
+<h1 class="font-headline-lg text-headline-lg mb-6">The Azure Suite</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                        A sanctuary where the sky meets the sea. Inspired by the legendary heritage of the Solaris Coast, The Azure Suite offers an unparalleled blend of artisanal craftsmanship and modern editorial design within Solaris Terrace.
+                    </p>
+</header>
+<section class="grid grid-cols-2 md:grid-cols-4 gap-6 py-12 border-y border-outline-variant/30 mb-12">
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase opacity-60">Living Space</span>
+<span class="font-title-lg text-title-lg">124 SQM</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase opacity-60">Bed Type</span>
+<span class="font-title-lg text-title-lg">Grand King</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase opacity-60">Occupancy</span>
+<span class="font-title-lg text-title-lg">2 Adults</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase opacity-60">View</span>
+<span class="font-title-lg text-title-lg">Panoramic Sea</span>
+</div>
+</section>
+<section class="mb-12">
+<h2 class="font-headline-md text-headline-md mb-8">Heritage &amp; Design</h2>
+<div class="prose prose-lg text-on-surface-variant font-body-md leading-relaxed space-y-6">
+<p>Designed by renowned architect Elena Rossi, the suite is a dialogue between traditional Mediterranean materiality and soft minimalism. Each piece of furniture has been hand-selected or custom-crafted by local artisans using reclaimed oak, terracotta, and hand-woven linens.</p>
+<p>The space is defined by its "Gallery" feel—vast white surfaces acting as a canvas for the changing light throughout the day. From the sun-drenched optimism of high-noon to the deep ocean blues of the blue hour, The Azure Suite adapts to your rhythm.</p>
+</div>
+</section>
+<section class="mb-12">
+<h2 class="font-headline-md text-headline-md mb-8">Amenities</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-high p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary" data-icon="pool">pool</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg mb-1">Private Infinity Pool</h4>
+<p class="text-on-surface-variant text-sm">Temperature controlled with salt-water filtration.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-high p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary" data-icon="skillet">skillet</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg mb-1">Private Chef Service</h4>
+<p class="text-on-surface-variant text-sm">On-demand fine dining prepared in your suite kitchen.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-high p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary" data-icon="spa">spa</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg mb-1">In-Suite Spa</h4>
+<p class="text-on-surface-variant text-sm">Dedicated massage table and organic essential oils.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-surface-container-high p-4 rounded-xl">
+<span class="material-symbols-outlined text-secondary" data-icon="connected_tv">connected_tv</span>
+</div>
+<div>
+<h4 class="font-title-lg text-title-lg mb-1">Smart Living</h4>
+<p class="text-on-surface-variant text-sm">Integrated climate and mood lighting control via tablet.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sticky Booking Widget -->
+<div class="lg:col-span-4 relative">
+<div class="sticky top-32 bg-surface-container-lowest p-8 rounded-[24px] shadow-lg border border-outline-variant/10">
+<div class="flex justify-between items-end mb-8">
+<div>
+<span class="font-headline-md text-headline-md text-primary">$1,240</span>
+<span class="text-on-surface-variant font-label-md text-label-md uppercase tracking-tight ml-1">/ Night</span>
+</div>
+</div>
+<div class="space-y-4 mb-8">
+<div class="bg-surface p-4 rounded-xl border border-outline-variant/20 focus-within:border-secondary transition-all">
+<label class="block font-label-md text-label-md text-on-surface-variant uppercase mb-2">Check-in / Check-out</label>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="calendar_today">calendar_today</span>
+<input class="bg-transparent border-none p-0 focus:ring-0 w-full font-body-md" readonly="" type="text" value="Oct 24 - Oct 29, 2024">
+</div>
+</div>
+<div class="bg-surface p-4 rounded-xl border border-outline-variant/20 focus-within:border-secondary transition-all">
+<label class="block font-label-md text-label-md text-on-surface-variant uppercase mb-2">Guests</label>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="group">group</span>
+<select class="bg-transparent border-none p-0 focus:ring-0 w-full font-body-md appearance-none">
+<option>2 Adults, 0 Children</option>
+<option>1 Adult</option>
+</select>
+</div>
+</div>
+</div>
+<div class="space-y-3 mb-8 py-6 border-t border-outline-variant/20">
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>$1,240 x 5 nights</span>
+<span>$6,200</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Service Fee</span>
+<span>$120</span>
+</div>
+<div class="flex justify-between font-title-lg text-title-lg pt-4">
+<span>Total</span>
+<span>$6,320</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-full font-title-lg text-title-lg hover:bg-primary-container transition-all shadow-md active:scale-95">Instant Booking</button>
+<p class="text-center text-on-surface-variant text-xs mt-4">You won't be charged yet</p>
+</div>
+</div>
+</div>
+<!-- Guest Reviews Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline-md text-headline-md mb-2">Guest Experiences</h2>
+<p class="text-on-surface-variant">Verified stories from our global community.</p>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="p-4 rounded-full border border-outline-variant/30 hover:border-secondary transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-4 rounded-full border border-outline-variant/30 hover:border-secondary transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Review 1 -->
+<div class="bg-surface-container-low p-8 rounded-2xl flex flex-col h-full">
+<div class="flex items-center gap-4 mb-6">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a smiling woman in high-end lifestyle fashion, soft lighting, minimalist background. The photography style is modern editorial, clean and bright." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw1m0ZdHCghemhIC_xqyjDCOG__vUYvL0NhCUV13mVFWur8DnKI81rLFH33foTGsS81TCQr2llOng6oKLe3xtF389wNa5j6PKeEkMQBfJbhYF9X7aGky9PMIsUdkrkwXSTpiw3WdYGPHJFgL4MyJ7V4r3Glv2WpeDrRHBpM5sL4fZBz2qJ2n0fpiKPMAoizJMOTkmBUM9Z4-AE9vewwJE1sZIY5li8rZrhtIRR8pNlxz7r03IiDm7fPZ_tngPx2BmtGAfKcMrjaOAL">
+<div>
+<h4 class="font-title-lg text-title-lg">Alexandra V.</h4>
+<span class="text-on-surface-variant text-sm">October 2024 • Verified Stay</span>
+</div>
+</div>
+<div class="flex gap-1 text-tertiary mb-4">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-6 flex-grow">"The attention to detail at Solaris Terrace is simply breathtaking. The way the morning light filters through the oak shutters into the living space makes you feel like you're living inside a painting."</p>
+</div>
+<!-- Review 2 -->
+<div class="bg-surface-container-low p-8 rounded-2xl flex flex-col h-full">
+<div class="flex items-center gap-4 mb-6">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Close up portrait of a sophisticated man, warm neutral colors, soft sunlight, high-fidelity luxury brand style photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWpH68huk62UujoeyTxSsfc1YHmk46oQRPuZAlY0qMDAAQjqW7p4a9UKjVwjYdWAPVoa6VFvGLZLaKCfkDfE2vCO4TawaWDm1wmfO8bM58NVLe-hXz8Gb865R5v7xh70g3lgSDkEx8xBIsxq0gEefJ5V_R1XQdwk1g3mLOqOEHrbaqofFl7_B0XxkYF2-XKir36VwJdCsBmCynGpBagxqZNO2FDnvirQabQXlUzcmTseN80wkVniN8dum81KihoHKVb6IvfGzfmnm-">
+<div>
+<h4 class="font-title-lg text-title-lg">Marcus Cheng</h4>
+<span class="text-on-surface-variant text-sm">September 2024 • Verified Stay</span>
+</div>
+</div>
+<div class="flex gap-1 text-tertiary mb-4">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-6 flex-grow">"Unrivaled service. The private chef prepared a local seafood feast that was the highlight of our entire trip. The infinity pool at sunset is a religious experience."</p>
+</div>
+<!-- Review 3 -->
+<div class="bg-surface-container-low p-8 rounded-2xl flex flex-col h-full">
+<div class="flex items-center gap-4 mb-6">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Elegantly dressed woman in a bright modern interior, high-key lighting, editorial fashion style photography with a luxury hotel atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo5DWcIItOfzksWq-As250087Dw0JvUoyJ36G6fwY1ytwyWAL7i5H3cnhFmqft4kDsxI52amvyCAVGmWwBQDBDMwv92g7kAZ2ohVk_6Sikx6KFhhnqSXD7RWpnFj6ZqvWD1Qsrr67TbNDEH_8pBHkiYXUjfILGYmi7PQ1bk5UyaAO6vGOeNHrunQITbdcZwgFRz7rHxHpxdZ6swi3uhxBS_nfI45NW4Y-oVKizFPMqaz6dzjaQMXmmUFtVK0gAVcuuyVaN2rOb0q95">
+<div>
+<h4 class="font-title-lg text-title-lg">Sasha Thorne</h4>
+<span class="text-on-surface-variant text-sm">August 2024 • Verified Stay</span>
+</div>
+</div>
+<div class="flex gap-1 text-tertiary mb-4">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-6 flex-grow">"The soft minimalism here is perfect. It's not cold or sterile, but warm and inviting. Best night of sleep I've had in years on that grand king bed."</p>
+</div>
+</div>
+</section>
+<!-- Related Rooms Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap">
+<h2 class="font-headline-md text-headline-md mb-12">Discover Other Suites</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Related Card 1 -->
+<a class="group" href="#">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A modern luxury hotel room with deep forest green accents, high ceilings, and large balcony doors leading to a jungle view. The lighting is soft and cinematic, highlighting rich textures of velvet and wood. The composition follows a high-end travel magazine aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJRAWr7S_WOdr-EFEe8NGRrY1MkPJngCZFl5m6Y4s4HDd6nf_j3003SwA0D9CS8stIBY8nnjq_fAIQQ4sq3d10Z6TUw1gCDodTqmRFIIpe2yY5fxDB1IBsdO2gAKDYMaWYdk5m-vu6x63NC-BgvsF5-SjM2c61M0v8dsLrs4JqOQAJFgc6cuu450Whwnm5wmNKJmtrqnmINt1r9foqwsIJXV_gIkuPQQBW84f3zvd0JXfo3UlcajIf36HpAi74h29uWiuKhqkdOLNO">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<span class="font-label-md text-label-md uppercase tracking-widest opacity-80 mb-2 block">Ocean View</span>
+<h3 class="font-headline-md text-2xl mb-1">The Terra Penthouse</h3>
+<p class="font-body-md text-body-md opacity-90">$1,850 / Night</p>
+</div>
+</div>
+</a>
+<!-- Related Card 2 -->
+<a class="group" href="#">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A bright and airy garden-side suite with light wood finishes, white linens, and large glass doors opening to a private botanical garden. The setting is bright, sunny, and optimistic with a sense of pure, modern luxury and calm sophistication." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVrabdrawMHwEPlaIlFj5LfODS1-rdubaqRpliy14kDCeQpGFSuNQpFo4-Sf4VTRMxyQo1stS_U7dWRzlB3rX7SUAItqjPcuMokVaZ7c2GGT2AAflWC8dxckxOk7C6a1ssG3H_TJs-PxRajDvu12_m_BDFIROihHUtiiB8R4wbE-DSbjijLDw0skq_P3UHXJ49_qowb6AHuZFCJdYsMjuukXT1kBpJlaYQsaikowBESTS_-wILOcAzbwBUxZh7U99PouiauISc4J1y">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<span class="font-label-md text-label-md uppercase tracking-widest opacity-80 mb-2 block">Garden Escape</span>
+<h3 class="font-headline-md text-2xl mb-1">The Verdant Suite</h3>
+<p class="font-body-md text-body-md opacity-90">$920 / Night</p>
+</div>
+</div>
+</a>
+<!-- Related Card 3 -->
+<a class="group" href="#">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Detail of a designer hotel suite lounge area with sculptural furniture, art on the walls, and a sophisticated warm-toned color palette. The room is flooded with soft daylight, creating a peaceful and expensive editorial feel. The aesthetics are rooted in modern adventurous luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxrnYA8jVb1mdmf_WdEjYAhY_QCrUcl6KfrdIxddoMymzaysyT2eBoW6JWk5i_sOrR9DUO3lVMCQnPK62Lw7dmzq-P59Z4izJzxngvzMai_gE6S0lpSKYdz7CjjX1NOLSWUZWnCd--iJ4Ek_8DvM8lJ6eClnWlg18hCER7F3DgxtjxtY_opv5cDMW5zhbIGdiVsjz53CCW7BzzTiLGFEBfWYGIa5gdG_CKnM0C_amyUh1UUnJE8ewJb_ooz_yUFvkXpdW_mQ7mvMvn">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<span class="font-label-md text-label-md uppercase tracking-widest opacity-80 mb-2 block">Sunset Point</span>
+<h3 class="font-headline-md text-2xl mb-1">The Solstice Loft</h3>
+<p class="font-body-md text-body-md opacity-90">$1,100 / Night</p>
+</div>
+</div>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-lowest full-width border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-section-gap max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<div class="font-display-lg text-headline-md text-primary dark:text-primary-fixed-dim mb-8 uppercase">SOLARIS TERRACE</div>
+<p class="text-on-surface-variant font-body-md mb-6">Defining the future of adventurous luxury through artisanal design and soulful Mediterranean hospitality.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-title-lg text-title-lg mb-4">Hotel</h5>
+<a class="text-on-surface-variant hover:text-tertiary transition-all font-label-md text-label-md uppercase tracking-widest" href="#">Our Story</a>
+<a class="text-on-surface-variant hover:text-tertiary transition-all font-label-md text-label-md uppercase tracking-widest" href="#">Sustainability</a>
+<a class="text-on-surface-variant hover:text-tertiary transition-all font-label-md text-label-md uppercase tracking-widest" href="#">Location</a>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-title-lg text-title-lg mb-4">Policies</h5>
+<a class="text-on-surface-variant hover:text-tertiary transition-all font-label-md text-label-md uppercase tracking-widest" href="#">Terms &amp; Conditions</a>
+<a class="text-on-surface-variant hover:text-tertiary transition-all font-label-md text-label-md uppercase tracking-widest" href="#">Privacy Policy</a>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-title-lg text-title-lg mb-4">Inquiries</h5>
+<a class="text-on-surface-variant hover:text-tertiary transition-all font-label-md text-label-md uppercase tracking-widest" href="#">Contact Concierge</a>
+<div class="flex gap-4 mt-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="share">share</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="language">language</span>
+</div>
+</div>
+</div>
+<div class="text-center py-8 border-t border-outline-variant/10">
+<p class="font-label-md text-label-md text-on-surface-variant opacity-60">© 2024 SOLARIS TERRACE. ALL RIGHTS RESERVED.</p>
+</div>
+</footer>
+<script>
+        // Subtle scroll interaction for header
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // Micro-interaction for booking calculation
+        const guestSelect = document.querySelector('select');
+        guestSelect.addEventListener('change', (e) => {
+            // Simulated calculation logic
+            console.log('Recalculating for guests:', e.target.value);
+        });
+    </script>
+</body></html>

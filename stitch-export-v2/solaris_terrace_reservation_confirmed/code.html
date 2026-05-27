@@ -1,0 +1,307 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Reservation Confirmed | LUXE VOYAGE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fade-up 0.8s ease-out forwards;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dbdad6",
+                    "primary": "#a43716",
+                    "tertiary-fixed-dim": "#ffb785",
+                    "on-secondary-container": "#2f677d",
+                    "tertiary-container": "#a8642e",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#c54f2c",
+                    "inverse-surface": "#2f312e",
+                    "inverse-primary": "#ffb5a0",
+                    "surface": "#faf9f5",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#fffbff",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#a73918",
+                    "secondary-container": "#aee5fe",
+                    "surface-container-highest": "#e3e2df",
+                    "tertiary": "#8b4c18",
+                    "inverse-on-surface": "#f2f1ed",
+                    "on-primary-fixed": "#3b0900",
+                    "secondary-fixed-dim": "#98cee7",
+                    "surface-container-low": "#f4f4f0",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#ffb5a0",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#bce9ff",
+                    "on-secondary-fixed": "#001f29",
+                    "background": "#faf9f5",
+                    "on-secondary-fixed-variant": "#0a4d62",
+                    "primary-fixed": "#ffdbd1",
+                    "on-primary-container": "#fffbff",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-surface-variant": "#58423c",
+                    "surface-variant": "#e3e2df",
+                    "outline": "#8b716a",
+                    "surface-bright": "#faf9f5",
+                    "outline-variant": "#dfc0b7",
+                    "on-surface": "#1b1c1a",
+                    "surface-container-high": "#e9e8e4",
+                    "surface-container": "#efeeea",
+                    "on-tertiary-fixed-variant": "#703703",
+                    "on-primary": "#ffffff",
+                    "secondary": "#2c657b",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#862201",
+                    "on-tertiary-fixed": "#301400",
+                    "on-background": "#1b1c1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "section-gap": "120px",
+                    "margin-mobile": "20px",
+                    "container-max": "1280px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Playfair Display"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "title-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "title-lg": ["20px", {"lineHeight": "1.5", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- Header (Suppressed BottomNav & Minimal TopNav for Transactional Success) -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-300">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto">
+<div class="font-display-lg text-title-lg tracking-widest text-primary">LUXE VOYAGE</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label-md">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="hidden md:inline">My Account</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-section-gap min-h-screen">
+<!-- Hero Confirmation Section -->
+<section class="relative w-full h-[614px] md:h-[716px] overflow-hidden">
+<img alt="Amalfi Coast Sunset" class="w-full h-full object-cover" data-alt="A panoramic wide-angle view of the Amalfi coast at sunset, with tiered pastel-colored villas clinging to the cliffs above a shimmering turquoise sea. The sky is a warm gradient of terracotta orange, soft peach, and deep violet. The overall aesthetic is one of sun-drenched, adventurous luxury with soft, romantic lighting and a high-key, sophisticated editorial feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1Gwyd-hOOuU2AuzzoJy_jT2yED0sr2CfojLLH7GHstvLSs7JI5rtJEWMRGcFMj3pyjqGQR_fktVwBaQTuyh-CWI1zniOxnyZ3LbYGsiATAFovXJFmPGqIgE53HY0h_t4T_fOyTrehfQyG6hSMxzv94r-sogKmjIe3F-xlmPcmI5gaCLIJFDCPSycsHyQgJORQNFQDbDiR-x5ZXqYtLhUh6DFfdcYZbsYBvJBtqlXrS6ZfGFS9fRoRlZGaL3gmWfmPQGUwog14fEOV">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-end pb-12 px-margin-mobile">
+<div class="animate-fade-up text-center">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-on-primary mb-6 shadow-xl">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'wght' 500;">check</span>
+</div>
+<h1 class="font-display-lg text-headline-lg md:text-display-lg text-on-surface mb-2">Reservation Confirmed</h1>
+<p class="font-body-lg text-on-surface-variant max-w-xl mx-auto">Your journey to the edge of the Mediterranean begins. We are delighted to welcome you to Solaris Terrace.</p>
+</div>
+</div>
+</section>
+<!-- Booking Details Layout -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop -mt-16 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Main Content Column -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Essential Stats Card (Bento Style) -->
+<div class="bg-surface-container-lowest p-8 md:p-12 rounded-[24px] shadow-sm border border-outline-variant/20 animate-fade-up" style="animation-delay: 0.1s">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:divide-x divide-outline-variant/30">
+<div class="space-y-1">
+<p class="font-label-md text-on-surface-variant uppercase">Booking Reference</p>
+<p class="font-title-lg text-primary tracking-widest">SV-992841X</p>
+</div>
+<div class="md:pl-8 space-y-1">
+<p class="font-label-md text-on-surface-variant uppercase">Check In</p>
+<p class="font-title-lg text-on-surface">Oct 14, 2024</p>
+<p class="text-xs text-on-surface-variant">After 3:00 PM</p>
+</div>
+<div class="md:pl-8 space-y-1">
+<p class="font-label-md text-on-surface-variant uppercase">Check Out</p>
+<p class="font-title-lg text-on-surface">Oct 21, 2024</p>
+<p class="text-xs text-on-surface-variant">Before 11:00 AM</p>
+</div>
+</div>
+</div>
+<!-- Welcome Message & Details -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-secondary-container/30 p-8 rounded-[24px] animate-fade-up" style="animation-delay: 0.2s">
+<h3 class="font-headline-md text-secondary mb-4">Welcome to the Estate</h3>
+<p class="text-on-secondary-fixed-variant leading-relaxed mb-6">
+                                Your suite at Solaris Terrace is being prepared with meticulous care. Our concierge team will reach out within 48 hours to personalize your arrival experience, including airport transfers and dining preferences.
+                            </p>
+<button class="flex items-center gap-2 text-secondary font-title-lg group">
+<span>Explore Guest Services</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-container p-8 rounded-[24px] flex flex-col justify-between animate-fade-up" style="animation-delay: 0.3s">
+<div>
+<h3 class="font-title-lg text-on-surface mb-2">Accommodation</h3>
+<p class="text-on-surface-variant mb-4">Terrace Suite with Infinity Pool View</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-highest px-3 py-1 rounded-full text-xs font-medium text-on-surface-variant">2 Adults</span>
+<span class="bg-surface-container-highest px-3 py-1 rounded-full text-xs font-medium text-on-surface-variant">Breakfast Included</span>
+<span class="bg-surface-container-highest px-3 py-1 rounded-full text-xs font-medium text-on-surface-variant">Private Balcony</span>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-outline-variant/30 flex justify-between items-center">
+<p class="font-label-md text-on-surface-variant">Total Paid</p>
+<p class="font-headline-md text-primary">€8,420.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar / Actions Column -->
+<aside class="lg:col-span-4 space-y-6">
+<div class="sticky top-32 space-y-6">
+<div class="bg-surface-container-lowest p-8 rounded-[24px] shadow-lg border border-outline-variant/10 animate-fade-up" style="animation-delay: 0.4s">
+<h4 class="font-title-lg mb-6">Stay Organized</h4>
+<div class="space-y-4">
+<button class="w-full flex items-center justify-center gap-3 bg-primary text-on-primary py-4 rounded-xl font-label-md hover:brightness-110 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">calendar_today</span>
+                                    Add to Calendar
+                                </button>
+<button class="w-full flex items-center justify-center gap-3 border border-outline text-on-surface-variant py-4 rounded-xl font-label-md hover:bg-surface transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">download</span>
+                                    Download PDF Receipt
+                                </button>
+<button class="w-full flex items-center justify-center gap-3 text-on-surface-variant py-2 font-label-md hover:text-primary transition-all">
+<span class="material-symbols-outlined">share</span>
+                                    Share Itinerary
+                                </button>
+</div>
+</div>
+<!-- Secondary Contextual Card -->
+<div class="bg-tertiary-container text-on-tertiary p-8 rounded-[24px] overflow-hidden relative group animate-fade-up" style="animation-delay: 0.5s">
+<div class="relative z-10">
+<h4 class="font-title-lg mb-2">Enhance Your Stay</h4>
+<p class="text-sm opacity-90 mb-6">Pre-book a private yacht tour of the Amalfi coast or a sunset dinner at our Michelin-starred terrace.</p>
+<button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 px-6 py-2 rounded-lg font-label-md transition-all">
+                                    Browse Experiences
+                                </button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-10 rotate-12">sailing</span>
+</div>
+</div>
+</aside>
+</div>
+</section>
+<!-- Guest Services Spotlight -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
+<div class="text-center mb-16">
+<p class="font-label-md text-primary uppercase tracking-[0.2em] mb-4">Refined Experiences</p>
+<h2 class="font-display-lg text-headline-lg">Curated Guest Services</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden rounded-[24px] mb-6 shadow-md">
+<img alt="Luxury Spa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Close-up of a luxury spa setting with smooth dark river stones and a single white orchid resting on a pristine linen towel. The lighting is soft and ambient with golden candlelight reflecting off a nearby water feature. The aesthetic is extremely clean, minimalist, and deeply relaxing, fitting into a warm-toned premium design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkJU_wisfpKnu4RKSia6jxJMPL6_fgFrIb6Qj-ldnlJtHxjtWIzIEXwRxW54zPH5rF4m8P6umU9Si87ZZpuFA0ItgFxZVN5NVSg1ENVXYdvZOMzL9c7D78Qvp0suKyYAPsFNgF5W5v_Tjba4SHn-NTgcVxUzObPMSzviN-E9D4UkRXPy0ijywIG5zRzZ07tCvQKnH_3aa8HNdX3PzqXNZYBGNGZeZVZN7oxjDiCX2Jje6BWocY88nUuQqgSQW_mr98o1aAtQqjwbTu">
+</div>
+<h4 class="font-title-lg mb-2">Solaris Wellness Spa</h4>
+<p class="text-on-surface-variant">Signature Mediterranean treatments inspired by local botanicals.</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden rounded-[24px] mb-6 shadow-md">
+<img alt="Fine Dining" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A beautifully set dinner table on a private terrace overlooking a darkening sea at twilight. Crisp white linens, sparkling crystal glassware, and elegant silver cutlery are illuminated by a single modern candle lamp. The mood is sophisticated, intimate, and evokes high-end Mediterranean fine dining with a color palette of navy blues and warm gold." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEhq_lQifktlswxhNh5Vjb3JQH6dyTCUC0iYUuCObftPCMHBaYlp6k6EmnTTsBOxzSDLx6MdGSD_cxrVWfpCrc-qY4sAF6Cym6kWmhuagsvyXnkSz1a--OrD-otL0EseLdI_nfpFoA5nqLiewvNMUrHEvXh_r3TjLzyfdGlP-idMF8f714HQd8IL6e8o3643BfNINdY2hxnWt8r9xePAT7CTaYz60-dIdk6AHshLKgC8d10z1-vR4BrEWrwyPIQvGYAdOaC_e5x2aP">
+</div>
+<h4 class="font-title-lg mb-2">Terrazza Belvedere</h4>
+<p class="text-on-surface-variant">Exceptional coastal cuisine with a focus on fresh daily catch.</p>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden rounded-[24px] mb-6 shadow-md">
+<img alt="Private Concierge" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A focused shot of a professional concierge's hands holding a bespoke leather-bound travel itinerary and a set of elegant room keys. The background is a blurred high-end hotel lobby with warm wood paneling and soft focus architectural lighting. The image conveys a sense of high-touch service and exclusive hospitality in a luxury setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyILmegcFPR4WPDeTEac6Db2YSai1PE-QI0qcOvJ0QdbalAFswAEBa_WYFJRTsqq_A8-yGPa4W0M3PLUwrXzGh0pu5o88Pcbf89Q4HjhgavC7tAlvAayZFyfKjK8qIA6pOrBno-7exNwIh7_spFHObkeGdr1UOmVJogiYqm5RuQO0QtdCoGFnXJTlTEpAWDfTcoBZB2IrbCFSXHHMw9IQj4p8afMBaSuF75Q8Z6SN4dBL7Zw3VB3gfWJfbvvb1-NCjLt0T0YHIOmi0">
+</div>
+<h4 class="font-title-lg mb-2">Personal Concierge</h4>
+<p class="text-on-surface-variant">Bespoke arrangements for travel, activities, and local insights.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-section-gap max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<div class="font-display-lg text-headline-md text-primary mb-8">LUXE VOYAGE</div>
+<p class="font-body-md text-on-surface-variant pr-8">Curating the world's most exceptional retreats for the discerning explorer.</p>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-label-md text-on-surface font-bold uppercase tracking-widest mb-2">Explore</h5>
+<a class="font-label-md text-on-surface-variant hover:text-tertiary transition-all" href="#">Destinations</a>
+<a class="font-label-md text-on-surface-variant hover:text-tertiary transition-all" href="#">Experiences</a>
+<a class="font-label-md text-on-surface-variant hover:text-tertiary transition-all" href="#">Offers</a>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-label-md text-on-surface font-bold uppercase tracking-widest mb-2">Company</h5>
+<a class="font-label-md text-on-surface-variant hover:text-tertiary transition-all" href="#">About Us</a>
+<a class="font-label-md text-on-surface-variant hover:text-tertiary transition-all" href="#">Sustainability</a>
+<a class="font-label-md text-on-surface-variant hover:text-tertiary transition-all" href="#">Press Centre</a>
+</div>
+<div class="flex flex-col gap-4">
+<h5 class="font-label-md text-on-surface font-bold uppercase tracking-widest mb-2">Support</h5>
+<a class="font-label-md text-on-surface-variant hover:text-tertiary transition-all" href="#">Contact Us</a>
+<a class="font-label-md text-on-surface-variant hover:text-tertiary transition-all" href="#">Privacy Policy</a>
+<a class="font-label-md text-on-surface-variant hover:text-tertiary transition-all" href="#">Terms &amp; Conditions</a>
+</div>
+</div>
+<div class="px-margin-mobile md:px-margin-desktop py-8 border-t border-outline-variant/10 max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-label-md text-on-surface-variant">© 2024 LUXE VOYAGE. ALL RIGHTS RESERVED.</p>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">brand_awareness</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">public</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">loyalty</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scroll effect for the header
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-6');
+            } else {
+                nav.classList.add('py-6');
+                nav.classList.remove('py-4');
+            }
+        });
+    </script>
+</body></html>

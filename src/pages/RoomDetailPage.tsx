@@ -1,97 +1,127 @@
-import {} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-const GALLERY_IMAGES = [
-  { src: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80', alt: 'Azure Suite bedroom with panoramic sea view' },
-  { src: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80', alt: 'Luxury en-suite bathroom with stone soaking tub' },
-  { src: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80', alt: 'Suite interior detail with curated art' },
-  { src: 'https://images.unsplash.com/photo-1572552636336-4ae6a62a3aec?w=600&q=80', alt: 'Private infinity pool at sunset' },
-  { src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80', alt: 'Suite lounge area at dusk' },
+const GALLERY = [
+  'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&q=85&fit=crop',
+  'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=85&fit=crop',
+  'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=85&fit=crop',
+  'https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?w=800&q=85&fit=crop',
+  'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=85&fit=crop',
+];
+
+const AMENITIES = [
+  { icon: 'pool', title: 'Private Infinity Pool', desc: 'Temperature controlled with salt-water filtration.' },
+  { icon: 'skillet', title: 'Private Chef Service', desc: 'On-demand fine dining prepared in your suite kitchen.' },
+  { icon: 'spa', title: 'In-Suite Spa', desc: 'Dedicated massage table and organic essential oils.' },
+  { icon: 'connected_tv', title: 'Smart Living', desc: 'Integrated climate and mood lighting control via tablet.' },
 ];
 
 const REVIEWS = [
   {
     name: 'Alexandra V.',
-    date: 'October 2024 • Verified Stay',
-    avatar: 'https://i.pravatar.cc/48?img=47',
-    quote: '"The attention to detail at Solaris Terrace is simply breathtaking. The way the morning light filters through the oak shutters into the living space makes you feel like you\'re living inside a painting."',
+    date: 'October 2024 - Verified Stay',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&crop=face',
+    text: '"The attention to detail at Solaris Terrace is simply breathtaking. The way the morning light filters through the oak shutters into the living space makes you feel like you\'re living inside a painting."',
   },
   {
     name: 'Marcus Cheng',
-    date: 'September 2024 • Verified Stay',
-    avatar: 'https://i.pravatar.cc/48?img=12',
-    quote: '"Unrivaled service. The private chef prepared a local seafood feast that was the highlight of our entire trip. The infinity pool at sunset is a religious experience."',
+    date: 'September 2024 - Verified Stay',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&crop=face',
+    text: '"Unrivaled service. The private chef prepared a local seafood feast that was the highlight of our entire trip. The infinity pool at sunset is a religious experience."',
   },
   {
     name: 'Sasha Thorne',
-    date: 'August 2024 • Verified Stay',
-    avatar: 'https://i.pravatar.cc/48?img=44',
-    quote: '"The soft minimalism here is perfect. It\'s not cold or sterile, but warm and inviting. Best night of sleep I\'ve had in years on that grand king bed."',
+    date: 'August 2024 - Verified Stay',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop&crop=face',
+    text: '"The soft minimalism here is perfect. It\'s not cold or sterile, but warm and inviting. Best night of sleep I\'ve had in years on that grand king bed."',
   },
 ];
 
 const RELATED = [
-  { label: 'Ocean View', name: 'The Terra Penthouse', price: '$1,850 / Night', img: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80' },
-  { label: 'Garden Escape', name: 'The Verdant Suite', price: '$920 / Night', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80' },
-  { label: 'Sunset Point', name: 'The Solstice Loft', price: '$1,100 / Night', img: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600&q=80' },
+  {
+    id: 'horizon-sanctuary',
+    label: 'Ocean View',
+    name: 'The Terra Penthouse',
+    price: '$1,850 / Night',
+    img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=85&fit=crop',
+  },
+  {
+    id: 'garden-retreat',
+    label: 'Garden Escape',
+    name: 'The Verdant Suite',
+    price: '$920 / Night',
+    img: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=85&fit=crop',
+  },
+  {
+    id: 'artisan-loft',
+    label: 'Sunset Point',
+    name: 'The Solstice Loft',
+    price: '$1,100 / Night',
+    img: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800&q=85&fit=crop',
+  },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
 export default function RoomDetailPage() {
+  useParams();
   const navigate = useNavigate();
-  const checkIn = 'Oct 24';
-  const checkOut = 'Oct 29, 2024';
-  const nights = 5;
-  const rate = 1240;
-  const serviceFee = 120;
-  const total = rate * nights + serviceFee;
 
   return (
-    <div className="bg-background text-on-background font-body-md scroll-smooth">
+    <div className="bg-background text-on-background font-body-md">
       <Navbar />
 
       <main className="pt-24 pb-section-gap">
-
-        {/* Mosaic Gallery */}
+        {/* â”€â”€ Mosaic Gallery â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-8">
           <div className="mosaic-grid">
             <div className="mosaic-large relative overflow-hidden rounded-xl group">
               <img
-                src={GALLERY_IMAGES[0].src}
-                alt={GALLERY_IMAGES[0].alt}
+                src={GALLERY[0]}
+                alt="Suite main view"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
-            {GALLERY_IMAGES.slice(1, 4).map((img, i) => (
+            {GALLERY.slice(1, 4).map((src, i) => (
               <div key={i} className="relative overflow-hidden rounded-xl group">
                 <img
-                  src={img.src}
-                  alt={img.alt}
+                  src={src}
+                  alt={`Suite view ${i + 2}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
             ))}
             <div className="relative overflow-hidden rounded-xl group bg-surface-container-high flex items-center justify-center cursor-pointer">
               <img
-                src={GALLERY_IMAGES[4].src}
-                alt={GALLERY_IMAGES[4].alt}
-                className="absolute inset-0 w-full h-full object-cover opacity-60"
+                src={GALLERY[4]}
+                alt="More photos"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
               />
               <span className="relative font-label-md text-label-md text-on-surface z-10 uppercase tracking-widest">+ 12 Photos</span>
             </div>
           </div>
         </div>
 
-        {/* Content grid */}
+        {/* â”€â”€ Content Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap grid grid-cols-1 lg:grid-cols-12 gap-gutter">
 
-          {/* Left column */}
+          {/* Left Column */}
           <div className="lg:col-span-8">
-            <header className="mb-12">
+            <motion.header
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              className="mb-12"
+            >
               <div className="flex items-center gap-4 mb-4">
-                <span className="bg-secondary/10 text-secondary px-4 py-1 rounded-full font-label-md text-label-md uppercase tracking-wider">Premium Suite</span>
+                <span className="bg-secondary/10 text-secondary px-4 py-1 rounded-full font-label-md text-label-md uppercase tracking-wider">
+                  Premium Suite
+                </span>
                 <div className="flex items-center text-tertiary">
                   <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                   <span className="font-label-md text-label-md ml-1">4.9 (124 Reviews)</span>
@@ -101,42 +131,55 @@ export default function RoomDetailPage() {
               <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
                 A sanctuary where the sky meets the sea. Inspired by the legendary heritage of the Solaris Coast, The Azure Suite offers an unparalleled blend of artisanal craftsmanship and modern editorial design within Solaris Terrace.
               </p>
-            </header>
+            </motion.header>
 
             {/* Specs */}
-            <section className="grid grid-cols-2 md:grid-cols-4 gap-6 py-12 border-y border-outline-variant/30 mb-12">
+            <motion.section
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 py-12 border-y border-outline-variant/30 mb-12"
+            >
               {[
                 { label: 'Living Space', value: '124 SQM' },
                 { label: 'Bed Type', value: 'Grand King' },
                 { label: 'Occupancy', value: '2 Adults' },
                 { label: 'View', value: 'Panoramic Sea' },
-              ].map(s => (
-                <div key={s.label} className="flex flex-col gap-2">
-                  <span className="font-label-md text-label-md text-on-surface-variant uppercase opacity-60">{s.label}</span>
-                  <span className="font-title-lg text-title-lg">{s.value}</span>
+              ].map(spec => (
+                <div key={spec.label} className="flex flex-col gap-2">
+                  <span className="font-label-md text-label-md text-on-surface-variant uppercase opacity-60">{spec.label}</span>
+                  <span className="font-title-lg text-title-lg">{spec.value}</span>
                 </div>
               ))}
-            </section>
+            </motion.section>
 
-            {/* Heritage */}
-            <section className="mb-12">
+            {/* Heritage & Design */}
+            <motion.section
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="mb-12"
+            >
               <h2 className="font-headline-md text-headline-md mb-8">Heritage &amp; Design</h2>
               <div className="text-on-surface-variant font-body-md leading-relaxed space-y-6">
                 <p>Designed by renowned architect Elena Rossi, the suite is a dialogue between traditional Mediterranean materiality and soft minimalism. Each piece of furniture has been hand-selected or custom-crafted by local artisans using reclaimed oak, terracotta, and hand-woven linens.</p>
-                <p>The space is defined by its "Gallery" feel—vast white surfaces acting as a canvas for the changing light throughout the day. From the sun-drenched optimism of high-noon to the deep ocean blues of the blue hour, The Azure Suite adapts to your rhythm.</p>
+                <p>The space is defined by its "Gallery" feelâ€”vast white surfaces acting as a canvas for the changing light throughout the day. From the sun-drenched optimism of high-noon to the deep ocean blues of the blue hour, The Azure Suite adapts to your rhythm.</p>
               </div>
-            </section>
+            </motion.section>
 
             {/* Amenities */}
-            <section className="mb-12">
+            <motion.section
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="mb-12"
+            >
               <h2 className="font-headline-md text-headline-md mb-8">Amenities</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {[
-                  { icon: 'pool', title: 'Private Infinity Pool', desc: 'Temperature controlled with salt-water filtration.' },
-                  { icon: 'skillet', title: 'Private Chef Service', desc: 'On-demand fine dining prepared in your suite kitchen.' },
-                  { icon: 'spa', title: 'In-Suite Spa', desc: 'Dedicated massage table and organic essential oils.' },
-                  { icon: 'connected_tv', title: 'Smart Living', desc: 'Integrated climate and mood lighting control via tablet.' },
-                ].map(a => (
+                {AMENITIES.map(a => (
                   <div key={a.title} className="flex items-start gap-4">
                     <div className="bg-surface-container-high p-4 rounded-xl shrink-0">
                       <span className="material-symbols-outlined text-secondary">{a.icon}</span>
@@ -148,15 +191,15 @@ export default function RoomDetailPage() {
                   </div>
                 ))}
               </div>
-            </section>
+            </motion.section>
           </div>
 
-          {/* Right column — sticky booking widget */}
+          {/* Right Column â€” Sticky Booking Widget */}
           <div className="lg:col-span-4 relative">
             <div className="sticky top-32 bg-surface-container-lowest p-8 rounded-[24px] shadow-lg border border-outline-variant/10">
               <div className="flex justify-between items-end mb-8">
                 <div>
-                  <span className="font-headline-md text-headline-md text-primary">${rate.toLocaleString()}</span>
+                  <span className="font-headline-md text-headline-md text-primary">$1,240</span>
                   <span className="text-on-surface-variant font-label-md text-label-md uppercase tracking-tight ml-1">/ Night</span>
                 </div>
               </div>
@@ -167,10 +210,10 @@ export default function RoomDetailPage() {
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-on-surface-variant">calendar_today</span>
                     <input
-                      className="bg-transparent border-none p-0 focus:ring-0 w-full font-body-md"
+                      type="text"
+                      defaultValue="Oct 24 - Oct 29, 2024"
                       readOnly
-                      value={`${checkIn} - ${checkOut}`}
-                      onChange={() => {}}
+                      className="bg-transparent border-none p-0 focus:ring-0 w-full font-body-md outline-none"
                     />
                   </div>
                 </div>
@@ -178,7 +221,7 @@ export default function RoomDetailPage() {
                   <label className="block font-label-md text-label-md text-on-surface-variant uppercase mb-2">Guests</label>
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-on-surface-variant">group</span>
-                    <select className="bg-transparent border-none p-0 focus:ring-0 w-full font-body-md appearance-none cursor-pointer">
+                    <select className="bg-transparent border-none p-0 focus:ring-0 w-full font-body-md appearance-none outline-none">
                       <option>2 Adults, 0 Children</option>
                       <option>1 Adult</option>
                       <option>2 Adults, 1 Child</option>
@@ -189,22 +232,22 @@ export default function RoomDetailPage() {
 
               <div className="space-y-3 mb-8 py-6 border-t border-outline-variant/20">
                 <div className="flex justify-between font-body-md text-on-surface-variant">
-                  <span>${rate.toLocaleString()} x {nights} nights</span>
-                  <span>${(rate * nights).toLocaleString()}</span>
+                  <span>$1,240 x 5 nights</span>
+                  <span>$6,200</span>
                 </div>
                 <div className="flex justify-between font-body-md text-on-surface-variant">
                   <span>Service Fee</span>
-                  <span>${serviceFee}</span>
+                  <span>$120</span>
                 </div>
                 <div className="flex justify-between font-title-lg text-title-lg pt-4">
                   <span>Total</span>
-                  <span>${total.toLocaleString()}</span>
+                  <span>$6,320</span>
                 </div>
               </div>
 
               <button
                 onClick={() => navigate('/booking')}
-                className="w-full bg-primary text-on-primary py-4 rounded-full font-title-lg text-title-lg hover:bg-primary/90 transition-all shadow-md active:scale-95 cursor-pointer"
+                className="w-full bg-primary text-on-primary py-4 rounded-full font-title-lg text-title-lg hover:bg-primary-container transition-all shadow-md active:scale-95"
               >
                 Instant Booking
               </button>
@@ -213,33 +256,31 @@ export default function RoomDetailPage() {
           </div>
         </div>
 
-        {/* Guest Reviews */}
-        <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap">
+        {/* â”€â”€ Guest Reviews â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        <motion.section
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap"
+        >
           <div className="flex justify-between items-end mb-12">
             <div>
               <h2 className="font-headline-md text-headline-md mb-2">Guest Experiences</h2>
               <p className="text-on-surface-variant">Verified stories from our global community.</p>
             </div>
             <div className="hidden md:flex gap-4">
-              <button className="p-4 rounded-full border border-outline-variant/30 hover:border-secondary transition-all cursor-pointer">
+              <button className="p-4 rounded-full border border-outline-variant/30 hover:border-secondary transition-all">
                 <span className="material-symbols-outlined">chevron_left</span>
               </button>
-              <button className="p-4 rounded-full border border-outline-variant/30 hover:border-secondary transition-all cursor-pointer">
+              <button className="p-4 rounded-full border border-outline-variant/30 hover:border-secondary transition-all">
                 <span className="material-symbols-outlined">chevron_right</span>
               </button>
             </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {REVIEWS.map((r, i) => (
-              <motion.div
-                key={r.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-surface-container-low p-8 rounded-2xl flex flex-col h-full"
-              >
+            {REVIEWS.map(r => (
+              <div key={r.name} className="bg-surface-container-low p-8 rounded-2xl flex flex-col h-full">
                 <div className="flex items-center gap-4 mb-6">
                   <img src={r.avatar} alt={r.name} className="w-12 h-12 rounded-full object-cover" />
                   <div>
@@ -248,29 +289,31 @@ export default function RoomDetailPage() {
                   </div>
                 </div>
                 <div className="flex gap-1 text-tertiary mb-4">
-                  {[...Array(5)].map((_, j) => (
-                    <span key={j} className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                   ))}
                 </div>
-                <p className="text-on-surface-variant italic mb-6 flex-grow">{r.quote}</p>
-              </motion.div>
+                <p className="text-on-surface-variant italic flex-grow">{r.text}</p>
+              </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        {/* Related Suites */}
-        <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap">
+        {/* â”€â”€ Related Suites â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+        <motion.section
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-section-gap"
+        >
           <h2 className="font-headline-md text-headline-md mb-12">Discover Other Suites</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {RELATED.map((r, i) => (
-              <motion.a
-                key={r.name}
-                href="/rooms"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group cursor-pointer"
+            {RELATED.map(r => (
+              <button
+                key={r.id}
+                onClick={() => navigate(`/rooms/${r.id}`)}
+                className="group text-left"
               >
                 <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-6">
                   <img
@@ -285,13 +328,14 @@ export default function RoomDetailPage() {
                     <p className="font-body-md text-body-md opacity-90">{r.price}</p>
                   </div>
                 </div>
-              </motion.a>
+              </button>
             ))}
           </div>
-        </section>
+        </motion.section>
       </main>
 
       <Footer />
     </div>
   );
 }
+

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SOLARIS TERRACE | The Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1b1c1a",
+                        "surface-tint": "#a73918",
+                        "surface-container-highest": "#e3e2df",
+                        "on-primary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "primary": "#a43716",
+                        "on-primary-fixed": "#3b0900",
+                        "on-secondary-fixed-variant": "#0a4d62",
+                        "on-tertiary-fixed-variant": "#703703",
+                        "secondary-fixed-dim": "#98cee7",
+                        "secondary-container": "#aee5fe",
+                        "on-tertiary-container": "#fffbff",
+                        "on-surface": "#1b1c1a",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e9e8e4",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffdbd1",
+                        "on-surface-variant": "#58423c",
+                        "error-container": "#ffdad6",
+                        "background": "#faf9f5",
+                        "tertiary-container": "#a8642e",
+                        "error": "#ba1a1a",
+                        "outline": "#8b716a",
+                        "surface-container-low": "#f4f4f0",
+                        "inverse-surface": "#2f312e",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f1ed",
+                        "tertiary-fixed": "#ffdcc6",
+                        "on-tertiary-fixed": "#301400",
+                        "on-primary-fixed-variant": "#862201",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ffb5a0",
+                        "outline-variant": "#dfc0b7",
+                        "on-secondary-fixed": "#001f29",
+                        "surface-container": "#efeeea",
+                        "surface": "#faf9f5",
+                        "secondary": "#2c657b",
+                        "tertiary": "#8b4c18",
+                        "inverse-primary": "#ffb5a0",
+                        "surface-bright": "#faf9f5",
+                        "tertiary-fixed-dim": "#ffb785",
+                        "primary-container": "#c54f2c",
+                        "surface-variant": "#e3e2df",
+                        "surface-dim": "#dbdad6",
+                        "on-secondary-container": "#2f677d",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#bce9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "title-lg": ["20px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center h-16 px-margin-mobile">
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md text-[24px] tracking-tight text-primary">SOLARIS TERRACE</h1>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md shadow-lg active:scale-95 transition-transform">
+            Reserve
+        </button>
+</header>
+<main class="pt-16">
+<!-- Hero Narrative Section -->
+<section class="relative h-[530px] flex items-end overflow-hidden">
+<img alt="Solaris Terrace Main View" class="absolute inset-0 w-full h-full object-cover" data-alt="A sun-drenched private villa balcony overlooking the turquoise Mediterranean Sea at dusk. The scene is bathed in warm, golden hour light, reflecting the 'Solaris &amp; Sea' brand aesthetic. Plush white outdoor furniture is arranged elegantly against terracotta-toned architecture. The atmosphere is quiet, sophisticated, and evokes a feeling of ultimate adventurous luxury and calm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHgUbs0GmVU2_p0yneGqHBr56Fzx_7eHu_ruyepHSRsUSGcF-t35Ess95vrD0nSc5TLHmDWLY6_qUJq0annvRKtOW6zBmws-XEQoAH8ebqyINH4ag_eTNwN773CpwFTZ_n4jG3WAUO27j6-33aT2pyjBpYdceEuV1KI3S6-uxbRCTjDA7dFEN1Ze5pZUjcPZHqtIiZyA10MbRzUT4vyBm4TtlL7vQEBFN0tPp16yG1SxYzl6kgINf35nSQgNL1Y0SXdsjwc-krBl6E"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="relative px-margin-mobile pb-12 w-full">
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-white mb-4">The Terrace</h2>
+<p class="text-white/90 font-body-md text-body-md max-w-sm">A singular sanctuary carved into the Amalfi cliffs, where the sun meets the sea in perfect harmony.</p>
+</div>
+</section>
+<!-- Narrative Stack: Vision -->
+<section class="px-margin-mobile py-16 bg-surface">
+<div class="flex flex-col gap-8">
+<div class="bg-surface-container-low p-8 rounded-3xl border border-outline-variant/20 shadow-sm">
+<span class="text-primary font-label-md text-label-md tracking-widest block mb-4">OUR PHILOSOPHY</span>
+<h3 class="font-headline-md text-headline-md mb-6 leading-tight">Quiet Luxury, Rooted in Place</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        At Solaris Terrace, we've stripped away the noise of traditional luxury to focus on the essential. Our boutique property offers only twelve suites, ensuring that your connection with the Mediterranean landscape is intimate, uninterrupted, and profoundly personal.
+                    </p>
+</div>
+<div class="rounded-3xl overflow-hidden shadow-xl aspect-[4/5]">
+<img alt="The Artisan Detail" class="w-full h-full object-cover" data-alt="A close-up shot of a traveler's hands holding an antique brass compass over a vintage leather-bound map on a wooden deck. The lighting is soft and warm, capturing the texture of the paper and the polished metal. This image represents the 'Adventurous Luxury' theme, focusing on the tactile and nostalgic elements of exploration with a refined, modern editorial finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAguG0TZu3J45TSRvGZS5p0xyP59m9LLrn2FgcRjbRr8p2mCoRbL6H1TM6ZU0LfVczrbOyXMIjEZpVIs7ipUuzHVwMefGhztX00JyEHsdsD_SQzzXRl__hMuiKj5GmPqEQcZb4hgVCIVSEywYJMDF8AG88YrDEKYYqrkUWUd4qsqHyGxivyMIHA7fha-WpXKH3W5NMUe1dJQZzMqbNMlIDXvAHZBHOS5CWw6Z4D-Phe4zmqew83QVCqcHfW-rgBTgy-mdumeV9R2iS4"/>
+</div>
+</div>
+</section>
+<!-- Experience Cards (Formerly Office Cards) -->
+<section class="px-margin-mobile py-16">
+<h2 class="font-headline-md text-headline-md mb-8">The Experience</h2>
+<div class="flex flex-col gap-6">
+<!-- The Gastronomy -->
+<div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-outline-variant/20 group">
+<div class="h-48 overflow-hidden">
+<img alt="The Solaris Table" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A sophisticated London street scene showing a classic white Georgian townhouse with a glossy black door and brass fixtures. The lighting is crisp morning light, creating elegant shadows on the pavement. The overall feel is one of heritage luxury, fitting the 'Adventurous Luxury' brand's urban presence with a palette of whites, blacks, and subtle warm stone tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAplAzthbRiLMPDLLoXRObvuwScUb51_yt3tH8VR6fqYfpNQjKSph4S4SNhfUOpaSv_5aAJciDlURUj5SdBtjFgqE9PwiZPTd8i5vGP81dPM3d0N4K9lN2bfU4Yf3za5J6ncn1-GKKN2xSbnWWoIOyqpH9QpnMWNFS2ys-GOexkMWCKxbUeZjXoJY4epSPR2Y8IyXG1v2zeaB7QppUPzDLTYIHuavyy_wW6WYfN9l8GmTUzor0GcLqPNQI-K3P483QuBFD2xR5fUF4X"/>
+</div>
+<div class="p-6">
+<h4 class="font-title-lg text-title-lg mb-2">The Al Fresco Table</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Our kitchen sources exclusively from the Terrace gardens and local artisanal fisherman.</p>
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+                            Daily Tasting Menus
+                        </div>
+</div>
+</div>
+<!-- The Wellness -->
+<div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-outline-variant/20 group">
+<div class="h-48 overflow-hidden">
+<img alt="The Sea Spa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A panoramic view of the Monaco harbor at sunset, with luxury yachts docked in clear blue water. The sky is a gradient of soft peach and violet, reflecting the 'Solaris &amp; Sea' aesthetic. The surrounding buildings are terraced and Mediterranean in style, glowing under the warm evening sun. The image evokes exclusivity, wealth, and peaceful coastal luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUsrLrhrTF_qFvpW_TZPjUXzsa7GxCqqLvb5VW56PqHvNIhSa786Uk_Ki1FT9dFMBFt3aUZcmKSZZpgsiVeLkPX1moddIwO8NEUoJGUNq5sI7V9zpupb8CfilsakC5-f8l-I7eV0PEaQwl1tJAxpgk7yqMhWtMVK8dvNLa_8_PfgPqqEdvQvsGc_A0tvyorEK58AuFFcfyi9o3m34SA-xmE0D4NUePLzbGyPJgH8_cSy1iSv-lFgN0Re9Ew3bGW0Pii2s3GoUpZ8ey"/>
+</div>
+<div class="p-6">
+<h4 class="font-title-lg text-title-lg mb-2">The Sea Rituals</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">A holistic wellness experience utilizing the restorative power of marine elements.</p>
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">spa</span>
+                            Thalassotherapy &amp; Yoga
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Get In Touch Form -->
+<section class="px-margin-mobile py-16 bg-surface-container-lowest">
+<div class="max-w-md mx-auto">
+<h2 class="font-headline-md text-headline-md text-center mb-2">Enquire</h2>
+<p class="text-on-surface-variant text-center mb-10 font-body-md text-body-md">Personalized service begins with your initial request.</p>
+<form class="flex flex-col gap-6" onsubmit="event.preventDefault(); alert('Enquiry received. Our house manager will contact you within 24 hours.');">
+<div class="group">
+<label class="font-label-md text-label-md text-primary mb-2 block ml-1">Full Name</label>
+<input class="w-full h-14 px-6 bg-surface-container-low rounded-xl border-none focus:ring-1.5 focus:ring-secondary transition-all outline-none font-body-md" placeholder="Alexander Vance" type="text"/>
+</div>
+<div class="group">
+<label class="font-label-md text-label-md text-primary mb-2 block ml-1">Email Address</label>
+<input class="w-full h-14 px-6 bg-surface-container-low rounded-xl border-none focus:ring-1.5 focus:ring-secondary transition-all outline-none font-body-md" placeholder="alexander@solaris.com" type="email"/>
+</div>
+<div class="group">
+<label class="font-label-md text-label-md text-primary mb-2 block ml-1">Arrival Window</label>
+<div class="relative">
+<select class="w-full h-14 px-6 bg-surface-container-low rounded-xl border-none focus:ring-1.5 focus:ring-secondary transition-all outline-none font-body-md appearance-none">
+<option>Spring (Apr - Jun)</option>
+<option>Summer (Jul - Sep)</option>
+<option>Autumn (Oct - Nov)</option>
+<option>Special Celebration</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+<div class="group">
+<label class="font-label-md text-label-md text-primary mb-2 block ml-1">Notes</label>
+<textarea class="w-full p-6 bg-surface-container-low rounded-xl border-none focus:ring-1.5 focus:ring-secondary transition-all outline-none font-body-md resize-none" placeholder="Dietary preferences or special requirements..." rows="4"></textarea>
+</div>
+<button class="w-full h-16 bg-primary text-on-primary rounded-xl font-title-lg text-title-lg shadow-xl hover:opacity-90 active:scale-[0.98] transition-all mt-4" type="submit">
+                        Send Enquiry
+                    </button>
+</form>
+</div>
+</section>
+<!-- Footer (Increased whitespace above per mobile optimization request) -->
+<footer class="bg-surface-container-highest flex flex-col items-center justify-center py-16 px-margin-mobile gap-6 text-center mt-32 mb-20">
+<h2 class="text-headline-md font-headline-md text-primary">SOLARIS TERRACE</h2>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Provenance</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Privacy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Media</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-label-md font-label-md" href="#">Location</a>
+</div>
+<p class="text-on-surface text-body-md font-body-md max-w-[280px]">Via Cristoforo Colombo, 24, 84017 Positano SA, Italy</p>
+<p class="text-on-surface-variant text-sm font-body-md">© 2024 SOLARIS TERRACE. All rights reserved.</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface-container-lowest shadow-[0_-4px_12px_rgba(44,101,123,0.08)] flex justify-around items-center h-20 pb-2 px-4">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1" href="#">
+<span class="material-symbols-outlined">hotel</span>
+<span class="text-label-md font-label-md mt-1">Suites</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="text-label-md font-label-md mt-1">Dining</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1" href="#">
+<span class="material-symbols-outlined">spa</span>
+<span class="text-label-md font-label-md mt-1">Wellness</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-fixed/20 rounded-full px-4 py-1 scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mail</span>
+<span class="text-label-md font-label-md mt-1">Enquire</span>
+</a>
+</nav>
+<script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

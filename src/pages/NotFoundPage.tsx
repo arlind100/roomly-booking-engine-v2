@@ -14,7 +14,7 @@ export default function NotFoundPage() {
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6 }}
           className="text-center max-w-xl"
         >
           <div className="font-display-lg text-[120px] leading-none text-primary/20 mb-6 select-none">
@@ -47,3 +47,4 @@ export default function NotFoundPage() {
     </div>
   );
 }
+

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SOLARIS TERRACE | Elevated Escape</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1b1c1a",
+                        "surface-tint": "#a73918",
+                        "surface-container-highest": "#e3e2df",
+                        "on-primary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "primary": "#a43716",
+                        "on-primary-fixed": "#3b0900",
+                        "on-secondary-fixed-variant": "#0a4d62",
+                        "on-tertiary-fixed-variant": "#703703",
+                        "secondary-fixed-dim": "#98cee7",
+                        "secondary-container": "#aee5fe",
+                        "on-tertiary-container": "#fffbff",
+                        "on-surface": "#1b1c1a",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e9e8e4",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffdbd1",
+                        "on-surface-variant": "#58423c",
+                        "error-container": "#ffdad6",
+                        "background": "#faf9f5",
+                        "tertiary-container": "#a8642e",
+                        "error": "#ba1a1a",
+                        "outline": "#8b716a",
+                        "surface-container-low": "#f4f4f0",
+                        "inverse-surface": "#2f312e",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f2f1ed",
+                        "tertiary-fixed": "#ffdcc6",
+                        "on-tertiary-fixed": "#301400",
+                        "on-primary-fixed-variant": "#862201",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ffb5a0",
+                        "outline-variant": "#dfc0b7",
+                        "on-secondary-fixed": "#001f29",
+                        "surface-container": "#efeeea",
+                        "surface": "#faf9f5",
+                        "secondary": "#2c657b",
+                        "tertiary": "#8b4c18",
+                        "inverse-primary": "#ffb5a0",
+                        "surface-bright": "#faf9f5",
+                        "tertiary-fixed-dim": "#ffb785",
+                        "primary-container": "#c54f2c",
+                        "surface-variant": "#e3e2df",
+                        "surface-dim": "#dbdad6",
+                        "on-secondary-container": "#2f677d",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#bce9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "140px",
+                        "container-max": "1280px",
+                        "margin-mobile": "24px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Playfair Display"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "title-lg": ["20px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopAppBar Component -->
+<nav class="fixed top-0 w-full z-50 bg-background/90 dark:bg-background/90 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20">
+<div class="flex justify-between items-center h-16 px-margin-mobile w-full">
+<button class="text-primary dark:text-primary-fixed-dim hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-md text-[24px] tracking-tight text-primary dark:text-primary-fixed-dim">SOLARIS TERRACE</span>
+<button class="px-4 py-1.5 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-150">
+                Book Stay
+            </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative w-full h-[850px] flex flex-col justify-end pb-24">
+<div class="absolute inset-0 z-0">
+<img alt="Luxury resort overlooking turquoise water" class="w-full h-full object-cover" data-alt="A cinematic, low-angle shot of a breathtaking infinity pool at a luxury clifftop resort during the golden hour. The sky is a gradient of warm terracotta and soft peach, reflecting in the crystal clear turquoise water. The overall mood is one of serene, high-end tranquility, emphasizing the adventurous luxury theme with sun-drenched lighting and premium textures. The aesthetic is clean and modern editorial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4p-JW11XT7Lhy5X0RiWouQob-ndonRfrc9iQlMlzl_4R59Km5_4i3gePDqqVMj36ob2tWxdHFH7t18EA5bKusOwaoiWLZATWp6F_TQWCNQ8wD_s_vzDKG_WRsrn3CrVd0IKlNZvkBSt4P0DUuKjExSvwnnWgnWZ_Anbut5uWEBa0jq6gMbatVkvXLgtfzfaaHK_i7VKxd66xahcqv8oO7q3THK4EswA0lPgxFL_8nf6H2QmzcqeNDLxhRcFAncCFPHotPtcnEa9Xd"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 px-margin-mobile">
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-on-background leading-[1.1] mb-12">
+                Discover the Art of <span class="italic text-primary">Elevated Escape</span>
+</h1>
+<!-- Search Form -->
+<div class="glass-effect p-6 rounded-2xl shadow-xl border border-white/40">
+<div class="flex flex-col gap-4">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-low p-3 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">calendar_today</span>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Check In/Out</span>
+<span class="font-title-lg text-sm">Select dates</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">group</span>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-widest text-outline font-bold">Occupancy</span>
+<span class="font-title-lg text-sm">2 Guests</span>
+</div>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary rounded-xl font-title-lg shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform">
+                        Check Availability
+                    </button>
+</div>
+</div>
+</div>
+</header>
+<!-- Local Gems Section -->
+<section class="pt-section-gap px-margin-mobile overflow-hidden">
+<div class="flex justify-between items-end mb-10">
+<div>
+<span class="text-primary font-label-md tracking-widest uppercase mb-3 block">Around Solaris</span>
+<h2 class="font-headline-md text-headline-md">Local Gems</h2>
+</div>
+</div>
+<div class="flex flex-col gap-10">
+<!-- Destination Card 1 -->
+<div class="group relative aspect-[4/5] rounded-3xl overflow-hidden shadow-lg">
+<img alt="Amalfi Coast view" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A lush, sun-drenched view of the Amalfi Coast's vibrant architecture clinging to steep cliffs overlooking a deep ocean blue sea. The lighting is warm and golden, evoking a high-end Mediterranean holiday feel. The composition is editorial and spacious, reflecting an adventurous luxury aesthetic with a warm white and terracotta color palette. Soft shadows define the architectural textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADPOhAs2VzmT8dE3NPUnTH1yTuhe1f6pC3H_KRDtzB7S83k7iOa_HTiqVmcib3IUrRcn56tDUFPtoToPNjFHXXpCKtwACRMUn7R5Yt98hS-n6Hdyc1wtbh6sEp0zQ3jarj7cqumbjqxYxBnaWa6o0OR_UOQ8FEbzkuP-COKNQc2F_PRJ8TCEgDQA_TOcOF__dPxkIuOuwLKclG5cZmEQaeT9VCyDhk5WsQJSZf9KSmnRjoYAWElDUNgn9l5ElLEfg9PdMw5rCsGOxq"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 p-6 text-on-primary w-full">
+<span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-label-md mb-3 uppercase tracking-wider">15 min Drive</span>
+<h3 class="font-headline-md text-2xl mb-1">Positano</h3>
+<p class="text-sm font-body-md text-white/80">Cascading cliffside elegance and vibrant boutiques.</p>
+</div>
+</div>
+<!-- Destination Card 2 -->
+<div class="group relative aspect-[4/5] rounded-3xl overflow-hidden shadow-lg">
+<img alt="Ravello view" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Dreamy overwater bungalows in a crystalline turquoise lagoon in French Polynesia. The scene is illuminated by bright, clear tropical daylight that creates a high-key, modern light-mode aesthetic. Palm trees sway gently in the background, framing the luxury architecture. The mood is serene and exclusive, emphasizing refined hospitality and natural beauty in a vibrant sea-themed palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOzjSaIdH1v1d0ZqH-i2V5zt7snNsG-3H7OI8d2qewaPKanZRBaybp3wpQyDpwPxc9-Q2mIclu-kmKhU-dF1KcauOo9YteExYGsJ9rqHqQiLW4EL-jruHcr0yfbO8I5V-1JRBiEw_6hOKJqEHSEuE48c5HvfXV7y0rkiEU5ebKjSsg99vb1Z34EwWLW_GgSh5iaRc9ETHBfh_BQviUrhItq4sEAcGYcTH0zOwDetywT6mUVOVhnOyh19u3IHJGSCpW5DU3zmiQ8bBh"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-0 p-6 text-on-primary w-full">
+<span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-label-md mb-3 uppercase tracking-wider">10 min Walk</span>
+<h3 class="font-headline-md text-2xl mb-1">Ravello</h3>
+<p class="text-sm font-body-md text-white/80">Historic gardens and panoramic hilltop views.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Luxe Experience Section -->
+<section class="mt-section-gap px-margin-mobile bg-surface-container-low py-20">
+<div class="text-center mb-14">
+<span class="text-secondary font-label-md tracking-widest uppercase mb-3 block">Guest Amenities</span>
+<h2 class="font-headline-md text-headline-md">Solaris Experience</h2>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Experience Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl border border-outline-variant/30 flex gap-6 items-start shadow-sm">
+<div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl">landscape</span>
+</div>
+<div>
+<h3 class="font-title-lg text-on-background mb-2">Private Terrace</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Each suite features an expansive private balcony overlooking the Mediterranean horizon.</p>
+</div>
+</div>
+<!-- Experience Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl border border-outline-variant/30 flex gap-6 items-start shadow-sm">
+<div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-3xl">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-title-lg text-on-background mb-2">Sea-Water Spa</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Holistic thalassotherapy programs utilizing the restorative powers of our local azure waters.</p>
+</div>
+</div>
+<!-- Experience Card 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-3xl border border-outline-variant/30 flex gap-6 items-start shadow-sm">
+<div class="w-16 h-16 rounded-2xl bg-tertiary-container/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary text-3xl">restaurant</span>
+</div>
+<div>
+<h3 class="font-title-lg text-on-background mb-2">Al Fresco Dining</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Michelin-standard cuisine served beneath the lemon groves of our terrace gardens.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonial Section -->
+<section class="py-24 px-margin-mobile">
+<div class="relative py-14 px-8 bg-surface dark:bg-surface-dim rounded-[40px] text-center border border-primary/10 shadow-sm">
+<span class="material-symbols-outlined text-primary text-5xl opacity-20 absolute top-8 left-8">format_quote</span>
+<div class="relative z-10">
+<p class="font-headline-md text-2xl italic text-on-background mb-10 leading-snug">
+                    "Solaris Terrace is more than a hotel; it's a sensory masterpiece. The silence of the morning and the light on the water are unforgettable."
+                </p>
+<div class="flex flex-col items-center">
+<img alt="Alexander Vance" class="w-14 h-14 rounded-full mb-4 grayscale object-cover" data-alt="A sophisticated close-up portrait of an elegant traveler in a luxury setting. The lighting is soft and flattering, typical of high-end editorial photography. The background is a blurred, warm-white interior that highlights the subject's refined appearance. The overall aesthetic is one of success and curated luxury, aligning with the brand's 'Adventurous Luxury' identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWdjMhkXfbm_nipOme-mo-6BYUJYFSx62tuMn9PVzFFUqv-J6mLgSs3yf2euoUPi2Rm5-4jNtJSVl6ZtBl5VdjhUrFAUXMftrOi5i9NyDU_0B3dBMKbgNW2CLL_Phd3ziFbCi0700bQ26Siv5j3tE21VDS0PYVs3Wmv-eBcn6l8PMVMBEp7qbH7HUY6F9DXEeFHYJKEia2MRDiJVmqtc6nlIVvULAdCfSD-uxSoIK31uTFf0T5Ih5QWvx3jx0SzkVTZe9dHHSSxxaX"/>
+<span class="font-title-lg text-[16px] text-primary">Julianna Moretti</span>
+<span class="text-xs uppercase tracking-widest text-outline mt-1">Returning Guest</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Component -->
+<footer class="w-full mt-auto bg-surface-container-highest dark:bg-surface-container-lowest border-t border-outline-variant/50">
+<div class="flex flex-col items-center justify-center py-16 px-margin-mobile gap-8 text-center">
+<span class="text-headline-md font-headline-md text-primary tracking-tight">SOLARIS TERRACE</span>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">About</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Rooms</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Dining</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="space-y-2">
+<p class="text-on-surface-variant font-body-md text-sm">Via dell'Oro 12, Ravello, SA 84010 Italy</p>
+<p class="text-on-surface dark:text-on-surface-variant font-body-md text-xs opacity-70">© 2024 SOLARIS TERRACE. All rights reserved.</p>
+</div>
+</div>
+<div class="h-20"></div> <!-- Spacer for BottomNav -->
+</footer>
+<!-- BottomNavBar Component -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface-container-lowest dark:bg-surface-container-low shadow-[0_-4px_12px_rgba(44,101,123,0.08)]">
+<div class="flex justify-around items-center h-20 pb-2 px-4">
+<!-- Discover (Active) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-primary-fixed/20 rounded-full px-4 py-1 scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hotel</span>
+<span class="text-label-md font-label-md mt-1">The Hotel</span>
+</a>
+<!-- Wishlist -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="text-label-md font-label-md mt-1">Dining</span>
+</a>
+<!-- Trips -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">spa</span>
+<span class="text-label-md font-label-md mt-1">Wellness</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-label-md font-label-md mt-1">Account</span>
+</a>
+</div>
+</nav>
+<script>
+        // Simple atmospheric effect: Fade in on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+
+        // Floating Header logic
+        let lastScroll = 0;
+        const nav = document.querySelector('nav:not(.fixed.bottom-0)');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) {
+                nav.classList.remove('shadow-md');
+                nav.style.transform = 'translateY(0)';
+                return;
+            }
+            if (currentScroll > lastScroll && currentScroll > 64) {
+                // Downscroll
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                // Upscroll
+                nav.style.transform = 'translateY(0)';
+                nav.classList.add('shadow-md');
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body></html>

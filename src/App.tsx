@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage';
 import RoomsPage from './pages/RoomsPage';
 import RoomDetailPage from './pages/RoomDetailPage';
 import BookingPage from './pages/BookingPage';
+import BookingProcessingPage from './pages/BookingProcessingPage';
+import ReservationConfirmedPage from './pages/ReservationConfirmedPage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -20,6 +22,8 @@ export default function App() {
           <Route path="/rooms" element={<RoomsPage />} />
           <Route path="/rooms/:id" element={<RoomDetailPage />} />
           <Route path="/booking" element={<BookingPage />} />
+          <Route path="/processing" element={<BookingProcessingPage />} />
+          <Route path="/confirmed" element={<ReservationConfirmedPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
