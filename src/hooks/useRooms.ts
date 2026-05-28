@@ -3,13 +3,16 @@ import { supabase, HOTEL_ID } from '../lib/supabase';
 import type { RoomType, PricingOverride, AvailabilityBlock, RoomAvailability } from '../lib/types';
 import { format, differenceInDays } from 'date-fns';
 
+const ROOM_SELECT = 'id, name, description, short_description, base_price, weekend_price, max_guests, room_size, amenities, image_url, images, show_on_website, available_units, view_type, bed_type, floor_level, smoking, featured';
+
 export function useRooms() {
   return useQuery<RoomType[]>({
     queryKey: ['room_types', HOTEL_ID],
+    enabled: !!HOTEL_ID,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('room_types')
-        .select('id, name, description, short_description, base_price, weekend_price, max_guests, room_size, amenities, image_url, images, show_on_website, available_units, view_type, bed_type, floor_level, smoking, featured')
+        .select(ROOM_SELECT)
         .eq('hotel_id', HOTEL_ID)
         .eq('show_on_website', true)
         .order('featured', { ascending: false })
@@ -24,11 +27,11 @@ export function useRooms() {
 export function useRoomById(id: string | undefined) {
   return useQuery<RoomType | null>({
     queryKey: ['room_type', id],
-    enabled: !!id,
+    enabled: !!id && !!HOTEL_ID,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('room_types')
-        .select('id, name, description, short_description, base_price, weekend_price, max_guests, room_size, amenities, image_url, images, show_on_website, available_units, view_type, bed_type, floor_level, smoking, featured')
+        .select(ROOM_SELECT)
         .eq('hotel_id', HOTEL_ID)
         .eq('id', id!)
         .single();
@@ -41,6 +44,7 @@ export function useRoomById(id: string | undefined) {
 export function usePricingOverrides() {
   return useQuery<PricingOverride[]>({
     queryKey: ['pricing_overrides', HOTEL_ID],
+    enabled: !!HOTEL_ID,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('pricing_overrides')
@@ -57,6 +61,7 @@ export function usePricingOverrides() {
 export function useAvailabilityBlocks() {
   return useQuery<AvailabilityBlock[]>({
     queryKey: ['availability_blocks', HOTEL_ID],
+    enabled: !!HOTEL_ID,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('availability_blocks')
@@ -70,7 +75,7 @@ export function useAvailabilityBlocks() {
 }
 
 export function useRoomAvailability(checkIn: Date | undefined, checkOut: Date | undefined) {
-  const enabled = !!checkIn && !!checkOut && differenceInDays(checkOut, checkIn) > 0;
+  const enabled = !!HOTEL_ID && !!checkIn && !!checkOut && differenceInDays(checkOut, checkIn) > 0;
   return useQuery<RoomAvailability[]>({
     queryKey: ['room_availability', HOTEL_ID, checkIn?.toISOString(), checkOut?.toISOString()],
     enabled,

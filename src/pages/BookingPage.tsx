@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -51,7 +51,7 @@ export default function BookingPage() {
 
   const [step, setStep] = useState(0);
   const [dir, setDir] = useState(1);
-  const [calendarOpen, setCalendarOpen] = useState<'in' | 'out' | null>(null);
+  const [calendarOpen, setCalendarOpen] = useState(false);
   const [checkIn, setCheckIn] = useState<Date | undefined>(() => {
     const d = searchParams.get('checkin');
     return d ? new Date(d + 'T00:00:00') : undefined;
@@ -64,6 +64,17 @@ export default function BookingPage() {
   const [children, setChildren] = useState(() => Math.max(0, parseInt(searchParams.get('children') || '0')));
   const [selectedRoom, setSelectedRoom] = useState<string>(searchParams.get('room') || '');
   const [loading, setLoading] = useState(false);
+
+  const calendarRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+        setCalendarOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
 
   const { data: hotel } = useHotel();
   const { data: rooms } = useRooms();
@@ -85,9 +96,15 @@ export default function BookingPage() {
   const today = startOfToday();
   const cur = getCurrencySymbol(hotel?.currency ?? 'EUR');
 
-  const allBlockedDates = useMemo(() => {
-    return blocks.map(b => new Date(b.date + 'T00:00:00'));
-  }, [blocks]);
+  // Block dates: filter by selected room when known, otherwise all room blocks
+  const blockedDates = useMemo(() => {
+    const relevant = selectedRoom
+      ? blocks.filter(b => b.room_type_id === selectedRoom)
+      : blocks;
+    return relevant.map(b => new Date(b.date + 'T00:00:00'));
+  }, [blocks, selectedRoom]);
+
+  const disabledDays = useMemo(() => [{ before: today }, ...blockedDates], [today, blockedDates]);
 
   const availMap = useMemo(() => {
     const m = new Map<string, number>();
@@ -139,7 +156,7 @@ export default function BookingPage() {
   }
 
   async function handleSubmit() {
-    const { firstName, lastName, email, phone } = getValues();
+    const { firstName, lastName, email, phone, specialRequests } = getValues();
     if (!selectedRoom || !checkIn || !checkOut || nights <= 0) return;
 
     setLoading(true);
@@ -173,31 +190,31 @@ export default function BookingPage() {
         return;
       }
 
-      // Fetch the reservation code to display on success page
-      const { data: resData } = await supabase
-        .from('reservations')
-        .select('reservation_code')
-        .eq('id', reservationId)
-        .single();
+      // Fetch reservation code via SECURITY DEFINER function (bypasses RLS)
+      const { data: reservationCode } = await supabase.rpc('get_reservation_code', {
+        p_reservation_id: reservationId,
+      });
+
+      // Persist special requests if provided
+      if (specialRequests?.trim()) {
+        supabase.rpc('save_reservation_notes', {
+          p_reservation_id: reservationId,
+          p_special_requests: specialRequests.trim(),
+        }).then(undefined, () => {});
+      }
 
       // Fire acknowledgement email (non-blocking)
       supabase.functions.invoke('send-booking-confirmation', {
         body: { reservation_id: reservationId, hotel_id: HOTEL_ID },
       }).catch(() => {});
 
-      navigate(`/booking/success?code=${resData?.reservation_code ?? ''}&email=${encodeURIComponent(email)}`);
+      navigate(`/booking/success?code=${reservationCode ?? ''}&email=${encodeURIComponent(email)}`);
     } catch {
       alert('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
   }
-
-  // ── Day picker modifiers ────────────────────────────────────────────────────
-  const disabledDays = [
-    { before: today },
-    ...allBlockedDates,
-  ];
 
   // ── Sidebar summary ─────────────────────────────────────────────────────────
   const Summary = () => (
@@ -334,54 +351,57 @@ export default function BookingPage() {
                     <div className="bg-surface-container-lowest rounded-3xl border border-outline-variant/20 p-8 md:p-10">
                       <h2 className="font-headline-md text-headline-md mb-8">Select Dates &amp; Guests</h2>
 
-                      {/* Date pickers */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
-                        <div className="relative">
-                          <label className="font-label-md text-[11px] uppercase tracking-wider text-on-surface-variant mb-2 block">Check-in</label>
-                          <button
-                            onClick={() => setCalendarOpen(calendarOpen === 'in' ? null : 'in')}
-                            className="w-full flex items-center gap-3 bg-surface-container p-4 rounded-xl text-left hover:bg-surface-container-high transition-colors"
-                          >
-                            <span className="material-symbols-outlined text-primary">calendar_today</span>
-                            <span className={checkIn ? 'font-medium' : 'text-on-surface-variant'}>
-                              {checkIn ? format(checkIn, 'EEE, MMM d, yyyy') : 'Select date'}
-                            </span>
-                          </button>
-                          {calendarOpen === 'in' && (
-                            <div className="absolute top-full left-0 z-50 mt-2 bg-surface rounded-2xl shadow-xl border border-outline-variant/20 overflow-hidden">
-                              <DayPicker
-                                mode="single"
-                                selected={checkIn}
-                                onSelect={(d) => { setCheckIn(d); if (d && checkOut && !isBefore(d, checkOut)) setCheckOut(undefined); setCalendarOpen(null); }}
-                                disabled={disabledDays}
-                                startMonth={today}
-                              />
-                            </div>
-                          )}
+                      {/* Date range buttons */}
+                      <div ref={calendarRef} className="mb-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                          <div>
+                            <label className="font-label-md text-[11px] uppercase tracking-wider text-on-surface-variant mb-2 block">Check-in</label>
+                            <button
+                              onClick={() => setCalendarOpen(p => !p)}
+                              className="w-full flex items-center gap-3 bg-surface-container p-4 rounded-xl text-left hover:bg-surface-container-high transition-colors"
+                            >
+                              <span className="material-symbols-outlined text-primary">calendar_today</span>
+                              <span className={checkIn ? 'font-medium' : 'text-on-surface-variant'}>
+                                {checkIn ? format(checkIn, 'EEE, MMM d, yyyy') : 'Select date'}
+                              </span>
+                            </button>
+                          </div>
+                          <div>
+                            <label className="font-label-md text-[11px] uppercase tracking-wider text-on-surface-variant mb-2 block">Check-out</label>
+                            <button
+                              onClick={() => setCalendarOpen(p => !p)}
+                              className="w-full flex items-center gap-3 bg-surface-container p-4 rounded-xl text-left hover:bg-surface-container-high transition-colors"
+                            >
+                              <span className="material-symbols-outlined text-primary">calendar_today</span>
+                              <span className={checkOut ? 'font-medium' : 'text-on-surface-variant'}>
+                                {checkOut ? format(checkOut, 'EEE, MMM d, yyyy') : 'Select date'}
+                              </span>
+                            </button>
+                          </div>
                         </div>
-                        <div className="relative">
-                          <label className="font-label-md text-[11px] uppercase tracking-wider text-on-surface-variant mb-2 block">Check-out</label>
-                          <button
-                            onClick={() => setCalendarOpen(calendarOpen === 'out' ? null : 'out')}
-                            className="w-full flex items-center gap-3 bg-surface-container p-4 rounded-xl text-left hover:bg-surface-container-high transition-colors"
-                          >
-                            <span className="material-symbols-outlined text-primary">calendar_today</span>
-                            <span className={checkOut ? 'font-medium' : 'text-on-surface-variant'}>
-                              {checkOut ? format(checkOut, 'EEE, MMM d, yyyy') : 'Select date'}
-                            </span>
-                          </button>
-                          {calendarOpen === 'out' && (
-                            <div className="absolute top-full left-0 z-50 mt-2 bg-surface rounded-2xl shadow-xl border border-outline-variant/20 overflow-hidden">
-                              <DayPicker
-                                mode="single"
-                                selected={checkOut}
-                                onSelect={(d) => { setCheckOut(d); setCalendarOpen(null); }}
-                                disabled={[...(checkIn ? [{ before: new Date(checkIn.getTime() + 86400000) }] : [{ before: today }]), ...allBlockedDates]}
-                                startMonth={checkIn ?? today}
-                              />
-                            </div>
-                          )}
-                        </div>
+
+                        {/* Shared range picker */}
+                        {calendarOpen && (
+                          <div className="mt-3 bg-surface rounded-2xl shadow-xl border border-outline-variant/20 overflow-x-auto">
+                            <DayPicker
+                              mode="range"
+                              selected={{ from: checkIn, to: checkOut }}
+                              onSelect={(range) => {
+                                setCheckIn(range?.from);
+                                const to = range?.to;
+                                if (to && range?.from && !isBefore(to, range.from)) {
+                                  setCheckOut(to);
+                                  setCalendarOpen(false);
+                                } else {
+                                  setCheckOut(undefined);
+                                }
+                              }}
+                              disabled={disabledDays}
+                              startMonth={today}
+                              numberOfMonths={window.innerWidth >= 640 ? 2 : 1}
+                            />
+                          </div>
+                        )}
                       </div>
 
                       {/* Guest steppers */}
@@ -553,6 +573,12 @@ export default function BookingPage() {
                             <div className="flex justify-between">
                               <span className="text-on-surface-variant">Phone</span>
                               <span>{getValues('phone')}</span>
+                            </div>
+                          )}
+                          {getValues('specialRequests') && (
+                            <div className="flex justify-between gap-4">
+                              <span className="text-on-surface-variant shrink-0">Requests</span>
+                              <span className="text-right">{getValues('specialRequests')}</span>
                             </div>
                           )}
                         </div>

@@ -1,10 +1,12 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { format } from 'date-fns';
+import { format, startOfToday, isBefore } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/style.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useRooms, usePricingOverrides, useRoomAvailability } from '../hooks/useRooms';
+import { useRooms, usePricingOverrides, useRoomAvailability, useAvailabilityBlocks } from '../hooks/useRooms';
 import { useHotel } from '../hooks/useHotel';
 import { getDayPrice, calcRoomTotal } from '../lib/pricing';
 import { getCurrencySymbol } from '../lib/types';
@@ -40,12 +42,15 @@ function SkeletonCard() {
 }
 
 const fadeUp = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
+const VIEW_OPTIONS = ['garden', 'sea', 'ocean', 'panoramic'];
+const BED_OPTIONS = ['queen', 'king', 'twin', 'double'];
 
 export default function RoomsPage() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const today = startOfToday();
 
-  // Read URL params
+  // ── URL param state ─────────────────────────────────────────────────────────
   const checkinParam = searchParams.get('checkin');
   const checkoutParam = searchParams.get('checkout');
   const adultsParam = Math.max(1, parseInt(searchParams.get('adults') || '2'));
@@ -55,8 +60,43 @@ export default function RoomsPage() {
   const checkOut = checkoutParam ? new Date(checkoutParam + 'T00:00:00') : undefined;
   const nights = checkIn && checkOut ? Math.max(0, Math.round((checkOut.getTime() - checkIn.getTime()) / 86400000)) : 0;
 
-  // Filters
+  // ── Inline search bar state ─────────────────────────────────────────────────
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [editCheckIn, setEditCheckIn] = useState<Date | undefined>(checkIn);
+  const [editCheckOut, setEditCheckOut] = useState<Date | undefined>(checkOut);
+  const [editAdults, setEditAdults] = useState(adultsParam);
+  const [editChildren, setEditChildren] = useState(childrenParam);
+  const [guestsOpen, setGuestsOpen] = useState(false);
+  const searchBarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (searchBarRef.current && !searchBarRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+        setGuestsOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  function applySearch() {
+    const p: Record<string, string> = {
+      adults: String(editAdults),
+      children: String(editChildren),
+    };
+    if (editCheckIn) p.checkin = format(editCheckIn, 'yyyy-MM-dd');
+    if (editCheckOut) p.checkout = format(editCheckOut, 'yyyy-MM-dd');
+    setSearchParams(p);
+    setSearchOpen(false);
+    setGuestsOpen(false);
+  }
+
+  const editGuestLabel = `${editAdults} Adult${editAdults > 1 ? 's' : ''}${editChildren > 0 ? `, ${editChildren} Child${editChildren > 1 ? 'ren' : ''}` : ''}`;
+
+  // ── Filters ─────────────────────────────────────────────────────────────────
   const [viewFilter, setViewFilter] = useState<string[]>([]);
+  const [bedFilter, setBedFilter] = useState<string[]>([]);
   const [priceMax, setPriceMax] = useState(500);
   const [sortBy, setSortBy] = useState<'popular' | 'price_asc' | 'price_desc'>('popular');
   const [showMap, setShowMap] = useState(false);
@@ -65,6 +105,7 @@ export default function RoomsPage() {
   const { data: rooms, isLoading } = useRooms();
   const { data: overrides = [] } = usePricingOverrides();
   const { data: availability = [] } = useRoomAvailability(checkIn, checkOut);
+  const { data: blocks = [] } = useAvailabilityBlocks();
 
   const cur = getCurrencySymbol(hotel?.currency ?? 'EUR');
 
@@ -74,6 +115,12 @@ export default function RoomsPage() {
     return m;
   }, [availability]);
 
+  // Build blocked dates for the inline date picker (all rooms)
+  const allBlockedDates = useMemo(
+    () => blocks.map(b => new Date(b.date + 'T00:00:00')),
+    [blocks],
+  );
+
   const filteredRooms = useMemo(() => {
     if (!rooms) return [];
     let list = rooms.filter(r => r.max_guests >= adultsParam);
@@ -82,10 +129,12 @@ export default function RoomsPage() {
       list = list.filter(r => r.view_type && viewFilter.includes(r.view_type));
     }
 
-    // Price filter based on base price
+    if (bedFilter.length > 0) {
+      list = list.filter(r => r.bed_type && bedFilter.includes(r.bed_type));
+    }
+
     list = list.filter(r => Number(r.base_price) <= priceMax);
 
-    // Sort
     if (sortBy === 'popular') {
       list = [...list].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
     } else if (sortBy === 'price_asc') {
@@ -95,7 +144,7 @@ export default function RoomsPage() {
     }
 
     return list;
-  }, [rooms, adultsParam, viewFilter, priceMax, sortBy]);
+  }, [rooms, adultsParam, viewFilter, bedFilter, priceMax, sortBy]);
 
   function buildBookingUrl(roomId: string) {
     const params = new URLSearchParams({ room: roomId });
@@ -110,7 +159,16 @@ export default function RoomsPage() {
     setViewFilter(f => f.includes(v) ? f.filter(x => x !== v) : [...f, v]);
   }
 
-  const VIEW_OPTIONS = ['ocean', 'garden', 'city', 'pool'];
+  function toggleBed(v: string) {
+    setBedFilter(f => f.includes(v) ? f.filter(x => x !== v) : [...f, v]);
+  }
+
+  // Derive which bed types actually exist in the room data
+  const availableBedTypes = useMemo(() => {
+    if (!rooms) return BED_OPTIONS;
+    const types = new Set(rooms.map(r => r.bed_type).filter(Boolean) as string[]);
+    return BED_OPTIONS.filter(b => types.has(b));
+  }, [rooms]);
 
   return (
     <div className="bg-surface text-on-surface font-body-md overflow-x-hidden custom-scrollbar">
@@ -119,26 +177,113 @@ export default function RoomsPage() {
       {/* Sticky sub-header */}
       <header className="sticky top-[72px] z-40 bg-surface-container-low border-b border-outline-variant/20 py-4 shadow-sm">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-wrap items-center justify-between gap-4">
-          <div
-            onClick={() => navigate(`/?edit=1`)}
-            className="flex items-center gap-4 bg-surface-bright rounded-full px-6 py-2 border border-outline-variant/30 flex-grow max-w-xl cursor-pointer hover:shadow-md transition-shadow"
-          >
-            <div className="flex items-center gap-2 border-r border-outline-variant/30 pr-4">
-              <span className="material-symbols-outlined text-primary text-lg">calendar_today</span>
-              <span className="font-label-md text-label-md">
-                {checkIn && checkOut ? `${format(checkIn, 'MMM d')} – ${format(checkOut, 'MMM d')}` : 'Select dates'}
-              </span>
+
+          {/* Inline search bar */}
+          <div ref={searchBarRef} className="relative flex-grow max-w-xl">
+            <div
+              onClick={() => { setSearchOpen(p => !p); setGuestsOpen(false); }}
+              className="flex items-center gap-4 bg-surface-bright rounded-full px-6 py-2 border border-outline-variant/30 cursor-pointer hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center gap-2 border-r border-outline-variant/30 pr-4">
+                <span className="material-symbols-outlined text-primary text-lg">calendar_today</span>
+                <span className="font-label-md text-label-md">
+                  {checkIn && checkOut ? `${format(checkIn, 'MMM d')} – ${format(checkOut, 'MMM d')}` : 'Select dates'}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-lg">group</span>
+                <span className="font-label-md text-label-md">
+                  {adultsParam} Adult{adultsParam > 1 ? 's' : ''}{childrenParam > 0 ? `, ${childrenParam} Child${childrenParam > 1 ? 'ren' : ''}` : ''}
+                </span>
+              </div>
+              <div className="ml-auto">
+                <span className="material-symbols-outlined text-on-surface-variant">edit</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-primary text-lg">group</span>
-              <span className="font-label-md text-label-md">
-                {adultsParam} Adult{adultsParam > 1 ? 's' : ''}{childrenParam > 0 ? `, ${childrenParam} Child${childrenParam > 1 ? 'ren' : ''}` : ''}
-              </span>
-            </div>
-            <div className="ml-auto">
-              <span className="material-symbols-outlined text-on-surface-variant">edit</span>
-            </div>
+
+            {/* Search dropdown */}
+            {searchOpen && (
+              <div className="absolute top-full left-0 mt-2 z-50 bg-surface rounded-3xl shadow-2xl border border-outline-variant/20 p-6 w-full min-w-[320px] md:min-w-[560px] space-y-5">
+                {/* Date range label */}
+                <div className="flex gap-4">
+                  <div className="flex-1 bg-surface-container rounded-xl p-3">
+                    <p className="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Check-in</p>
+                    <p className="font-medium text-sm">{editCheckIn ? format(editCheckIn, 'EEE, MMM d, yyyy') : 'Select date'}</p>
+                  </div>
+                  <div className="flex-1 bg-surface-container rounded-xl p-3">
+                    <p className="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Check-out</p>
+                    <p className="font-medium text-sm">{editCheckOut ? format(editCheckOut, 'EEE, MMM d, yyyy') : 'Select date'}</p>
+                  </div>
+                </div>
+
+                {/* Range picker */}
+                <div className="overflow-x-auto">
+                  <DayPicker
+                    mode="range"
+                    selected={{ from: editCheckIn, to: editCheckOut }}
+                    onSelect={(range) => {
+                      setEditCheckIn(range?.from);
+                      const to = range?.to;
+                      if (to && range?.from && !isBefore(to, range.from)) {
+                        setEditCheckOut(to);
+                      } else {
+                        setEditCheckOut(undefined);
+                      }
+                    }}
+                    disabled={[{ before: today }, ...allBlockedDates]}
+                    startMonth={today}
+                    numberOfMonths={window.innerWidth >= 640 ? 2 : 1}
+                  />
+                </div>
+
+                {/* Guests row */}
+                <div className="border-t border-outline-variant/20 pt-4">
+                  <div
+                    onClick={(e) => { e.stopPropagation(); setGuestsOpen(p => !p); }}
+                    className="flex items-center justify-between bg-surface-container rounded-xl px-5 py-3 cursor-pointer hover:bg-surface-container-high transition-colors"
+                  >
+                    <span className="font-label-md text-sm">{editGuestLabel}</span>
+                    <span className="material-symbols-outlined text-on-surface-variant text-lg">{guestsOpen ? 'expand_less' : 'expand_more'}</span>
+                  </div>
+                  {guestsOpen && (
+                    <div className="mt-3 bg-surface-container rounded-xl p-4 space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-title-lg text-sm">Adults</p>
+                          <p className="text-xs text-on-surface-variant">Age 13+</p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <button onClick={(e) => { e.stopPropagation(); setEditAdults(a => Math.max(1, a - 1)); }} className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface font-bold text-lg">−</button>
+                          <span className="w-5 text-center font-semibold">{editAdults}</span>
+                          <button onClick={(e) => { e.stopPropagation(); setEditAdults(a => Math.min(8, a + 1)); }} className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface font-bold text-lg">+</button>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-title-lg text-sm">Children</p>
+                          <p className="text-xs text-on-surface-variant">Under 13</p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <button onClick={(e) => { e.stopPropagation(); setEditChildren(c => Math.max(0, c - 1)); }} className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface font-bold text-lg">−</button>
+                          <span className="w-5 text-center font-semibold">{editChildren}</span>
+                          <button onClick={(e) => { e.stopPropagation(); setEditChildren(c => Math.min(4, c + 1)); }} className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface font-bold text-lg">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  onClick={applySearch}
+                  className="w-full py-3 bg-primary text-on-primary rounded-full font-label-md hover:brightness-110 transition-all flex items-center justify-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-base">search</span>
+                  Search
+                </button>
+              </div>
+            )}
           </div>
+
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowMap(v => !v)}
@@ -201,6 +346,26 @@ export default function RoomsPage() {
                 ))}
               </div>
             </div>
+
+            {/* Bed type */}
+            {availableBedTypes.length > 0 && (
+              <div>
+                <h3 className="font-title-lg text-title-lg text-on-surface mb-6">Bed Type</h3>
+                <div className="space-y-3">
+                  {availableBedTypes.map(b => (
+                    <label key={b} className="flex items-center gap-3 cursor-pointer group">
+                      <input
+                        type="checkbox"
+                        checked={bedFilter.includes(b)}
+                        onChange={() => toggleBed(b)}
+                        className="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary"
+                      />
+                      <span className="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors capitalize">{b} Bed</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </aside>
 
@@ -223,10 +388,10 @@ export default function RoomsPage() {
               <h2 className="font-title-lg text-xl mb-2">No rooms match your criteria</h2>
               <p className="text-on-surface-variant mb-6">Try adjusting your filters or selecting different dates.</p>
               <button
-                onClick={() => navigate('/')}
+                onClick={() => { setViewFilter([]); setBedFilter([]); setPriceMax(500); }}
                 className="px-8 py-3 bg-primary text-on-primary rounded-full font-label-md"
               >
-                Change Dates
+                Clear Filters
               </button>
             </div>
           ) : (
@@ -256,7 +421,11 @@ export default function RoomsPage() {
                         alt={room.name}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <button className="absolute top-4 right-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+                      <button
+                        onClick={(e) => e.preventDefault()}
+                        className="absolute top-4 right-4 w-10 h-10 glass-effect rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+                        aria-label="Save to wishlist"
+                      >
                         <span className="material-symbols-outlined">favorite</span>
                       </button>
                       <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
@@ -267,7 +436,7 @@ export default function RoomsPage() {
                           <span className="font-label-md text-[10px] px-3 py-1 rounded-full bg-secondary/90 text-on-secondary backdrop-blur-md capitalize">{room.view_type} VIEW</span>
                         )}
                         {remaining !== undefined && remaining <= 3 && remaining > 0 && (
-                          <span className="font-label-md text-[10px] px-3 py-1 rounded-full bg-error text-white backdrop-blur-md">Only {remaining} left!</span>
+                          <span className="font-label-md text-[10px] px-3 py-1 rounded-full bg-error text-on-error backdrop-blur-md">Only {remaining} left!</span>
                         )}
                         {isUnavailable && (
                           <span className="font-label-md text-[10px] px-3 py-1 rounded-full bg-surface/80 text-on-surface backdrop-blur-md">Unavailable</span>
@@ -326,7 +495,7 @@ export default function RoomsPage() {
                         </div>
                         <div className="flex gap-2">
                           <button
-                            onClick={() => navigate(`/rooms/${room.id}${checkinParam ? `?checkin=${checkinParam}&checkout=${checkoutParam}&adults=${adultsParam}&children=${childrenParam}` : ''}`)}
+                            onClick={() => navigate(`/rooms/${room.id}?checkin=${checkinParam ?? ''}&checkout=${checkoutParam ?? ''}&adults=${adultsParam}&children=${childrenParam}`)}
                             className="border border-primary text-primary px-4 py-2.5 rounded-full font-label-md text-sm hover:bg-primary/10 transition-colors duration-300"
                           >
                             Details
