@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { format, startOfToday, isBefore } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import 'react-day-picker/style.css';
 
 const TESTIMONIALS = [
   {
@@ -33,6 +36,43 @@ const fadeUp = {
 export default function HomePage() {
   const navigate = useNavigate();
   const [activeIdx, setActiveIdx] = useState(0);
+
+  // Hero search state
+  const today = startOfToday();
+  const [checkIn, setCheckIn] = useState<Date | undefined>();
+  const [checkOut, setCheckOut] = useState<Date | undefined>();
+  const [adults, setAdults] = useState(2);
+  const [children, setChildren] = useState(0);
+  const [calendarOpen, setCalendarOpen] = useState<'in' | 'out' | null>(null);
+  const [guestsOpen, setGuestsOpen] = useState(false);
+  const calendarRef = useRef<HTMLDivElement>(null);
+  const guestsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) setCalendarOpen(null);
+      if (guestsRef.current && !guestsRef.current.contains(e.target as Node)) setGuestsOpen(false);
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  function handleSearch() {
+    const params = new URLSearchParams();
+    if (checkIn) params.set('checkin', format(checkIn, 'yyyy-MM-dd'));
+    if (checkOut) params.set('checkout', format(checkOut, 'yyyy-MM-dd'));
+    params.set('adults', String(adults));
+    params.set('children', String(children));
+    navigate(`/rooms?${params.toString()}`);
+  }
+
+  const guestLabel = `${adults} Adult${adults > 1 ? 's' : ''}${children > 0 ? `, ${children} Child${children > 1 ? 'ren' : ''}` : ''}`;
+
+  const dateLabel = checkIn && checkOut
+    ? `${format(checkIn, 'MMM d')} – ${format(checkOut, 'MMM d, yyyy')}`
+    : checkIn
+      ? `${format(checkIn, 'MMM d')} – Check-out?`
+      : 'Select dates';
 
   function prev() {
     setActiveIdx(i => (i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
@@ -82,31 +122,84 @@ export default function HomePage() {
             className="max-w-4xl mx-auto mt-12"
           >
             <div className="glass-effect rounded-[24px] p-2 md:p-3 shadow-2xl flex flex-col md:flex-row items-stretch gap-2">
-              <div className="flex-1 bg-surface/50 hover:bg-surface transition-colors rounded-xl px-6 py-4 text-left">
-                <label className="block font-label-md text-[10px] text-primary uppercase tracking-widest mb-1">
-                  Check-in / Check-out
-                </label>
-                <input
-                  type="text"
-                  placeholder="Select dates"
-                  className="bg-transparent border-none p-0 w-full focus:ring-0 text-on-surface font-title-lg text-title-lg placeholder:text-on-surface-variant/50 outline-none"
-                />
+
+              {/* Date picker trigger */}
+              <div ref={calendarRef} className="flex-1 relative">
+                <button
+                  onClick={() => { setCalendarOpen(p => p ? null : 'in'); setGuestsOpen(false); }}
+                  className="w-full bg-surface/60 hover:bg-surface transition-colors rounded-xl px-6 py-4 text-left"
+                >
+                  <span className="block font-label-md text-[10px] text-primary uppercase tracking-widest mb-1">Dates</span>
+                  <span className={`font-title-lg text-title-lg ${checkIn ? 'text-on-surface' : 'text-on-surface-variant/60'}`}>
+                    {dateLabel}
+                  </span>
+                </button>
+                {calendarOpen && (
+                  <div className="absolute top-full left-0 z-50 mt-2 bg-surface rounded-2xl shadow-2xl border border-outline-variant/20 overflow-hidden">
+                    <DayPicker
+                      mode="range"
+                      selected={{ from: checkIn, to: checkOut }}
+                      onSelect={(range) => {
+                        setCheckIn(range?.from);
+                        const to = range?.to;
+                        if (to && range?.from && !isBefore(to, range.from)) {
+                          setCheckOut(to);
+                          setCalendarOpen(null);
+                        } else {
+                          setCheckOut(undefined);
+                        }
+                      }}
+                      disabled={{ before: today }}
+                      startMonth={today}
+                      numberOfMonths={2}
+                    />
+                  </div>
+                )}
               </div>
-              <div className="flex-1 bg-surface/50 hover:bg-surface transition-colors rounded-xl px-6 py-4 text-left border-l border-outline-variant/20">
-                <label className="block font-label-md text-[10px] text-primary uppercase tracking-widest mb-1">
-                  Guests
-                </label>
-                <input
-                  type="text"
-                  placeholder="Add guests"
-                  className="bg-transparent border-none p-0 w-full focus:ring-0 text-on-surface font-title-lg text-title-lg placeholder:text-on-surface-variant/50 outline-none"
-                />
+
+              {/* Guest selector */}
+              <div ref={guestsRef} className="relative md:w-52">
+                <button
+                  onClick={() => { setGuestsOpen(p => !p); setCalendarOpen(null); }}
+                  className="w-full bg-surface/60 hover:bg-surface transition-colors rounded-xl px-6 py-4 text-left border-t md:border-t-0 md:border-l border-outline-variant/20"
+                >
+                  <span className="block font-label-md text-[10px] text-primary uppercase tracking-widest mb-1">Guests</span>
+                  <span className="font-title-lg text-title-lg text-on-surface">{guestLabel}</span>
+                </button>
+                {guestsOpen && (
+                  <div className="absolute top-full left-0 z-50 mt-2 bg-surface rounded-2xl shadow-2xl border border-outline-variant/20 p-6 w-64 space-y-5">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-title-lg text-sm">Adults</p>
+                        <p className="text-xs text-on-surface-variant">Age 13+</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button onClick={() => setAdults(a => Math.max(1, a - 1))} className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container text-lg font-bold">−</button>
+                        <span className="w-5 text-center font-semibold">{adults}</span>
+                        <button onClick={() => setAdults(a => Math.min(8, a + 1))} className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container text-lg font-bold">+</button>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-title-lg text-sm">Children</p>
+                        <p className="text-xs text-on-surface-variant">Under 13</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button onClick={() => setChildren(c => Math.max(0, c - 1))} className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container text-lg font-bold">−</button>
+                        <span className="w-5 text-center font-semibold">{children}</span>
+                        <button onClick={() => setChildren(c => Math.min(4, c + 1))} className="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container text-lg font-bold">+</button>
+                      </div>
+                    </div>
+                    <button onClick={() => setGuestsOpen(false)} className="w-full py-2 bg-primary text-on-primary rounded-full font-label-md text-sm">Done</button>
+                  </div>
+                )}
               </div>
+
               <button
-                onClick={() => navigate('/rooms')}
-                className="bg-primary text-on-primary px-10 py-5 rounded-xl font-label-md text-label-md hover:bg-primary-container transition-all flex items-center justify-center gap-2"
+                onClick={handleSearch}
+                className="bg-primary text-on-primary px-10 py-5 rounded-xl font-label-md text-label-md hover:brightness-110 transition-all flex items-center justify-center gap-2"
               >
-                <span className="material-symbols-outlined">calendar_today</span>
+                <span className="material-symbols-outlined">search</span>
                 Check Availability
               </button>
             </div>
